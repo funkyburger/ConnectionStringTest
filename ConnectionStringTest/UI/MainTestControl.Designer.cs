@@ -49,13 +49,14 @@ namespace ConnectionStringTest.UI
             this.fireTestButton.TabIndex = 2;
             this.fireTestButton.Text = "Test";
             this.fireTestButton.UseVisualStyleBackColor = true;
+            this.fireTestButton.Click += new System.EventHandler(this.fireTestButton_Click);
             // 
             // testResultLabel
             // 
             this.testResultLabel.AutoSize = true;
             this.testResultLabel.Location = new System.Drawing.Point(84, 34);
             this.testResultLabel.Name = "testResultLabel";
-            this.testResultLabel.Size = new System.Drawing.Size(24, 13);
+            this.testResultLabel.Size = new System.Drawing.Size(87, 13);
             this.testResultLabel.TabIndex = 3;
             this.testResultLabel.Text = "-Test result label-";
             // 

@@ -58,6 +58,8 @@ namespace ConnectionStringTest
             this.testResultLabel.Name = "testResultLabel";
             this.testResultLabel.Size = new System.Drawing.Size(0, 13);
             this.testResultLabel.TabIndex = 2;
+            this.testResultLabel.Text = "test";
+
             // 
             // Form1
             // 

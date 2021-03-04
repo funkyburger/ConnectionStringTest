@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConnectionStringTest.Event;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,7 @@ namespace ConnectionStringTest.UI
         public MainForm()
         {
             InitializeComponent();
+            mainTestControl.AddUiEventHandler(new TestButtonClickHandler(this));
         }
     }
 }

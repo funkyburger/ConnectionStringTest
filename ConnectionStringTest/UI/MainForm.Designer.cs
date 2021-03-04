@@ -29,22 +29,22 @@ namespace ConnectionStringTest.UI
         /// </summary>
         private void InitializeComponent()
         {
-            this.mainTestControl1 = new ConnectionStringTest.UI.MainTestControl();
+            this.mainTestControl = new ConnectionStringTest.UI.MainTestControl();
             this.SuspendLayout();
             // 
-            // mainTestControl1
+            // mainTestControl
             // 
-            this.mainTestControl1.Location = new System.Drawing.Point(3, 12);
-            this.mainTestControl1.Name = "mainTestControl1";
-            this.mainTestControl1.Size = new System.Drawing.Size(785, 60);
-            this.mainTestControl1.TabIndex = 0;
+            this.mainTestControl.Location = new System.Drawing.Point(3, 12);
+            this.mainTestControl.Name = "mainTestControl";
+            this.mainTestControl.Size = new System.Drawing.Size(785, 60);
+            this.mainTestControl.TabIndex = 0;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(786, 71);
-            this.Controls.Add(this.mainTestControl1);
+            this.Controls.Add(this.mainTestControl);
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.ResumeLayout(false);
@@ -53,6 +53,6 @@ namespace ConnectionStringTest.UI
 
         #endregion
 
-        private MainTestControl mainTestControl1;
+        private MainTestControl mainTestControl;
     }
 }
