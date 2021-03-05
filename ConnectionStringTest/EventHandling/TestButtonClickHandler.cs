@@ -31,11 +31,15 @@ namespace ConnectionStringTest.EventHandling
 
             await Task.Run(() =>
             {
+                var start = DateTime.Now;
+                mainTestControl.UpdateTimer(TimeSpan.Zero);
                 var task = ConnectionStringTester.Test(mainTestControl.ConnectionString);
                 while (!task.IsCompleted)
                 {
+                    mainTestControl.UpdateTimer(DateTime.Now - start);
                 }
 
+                mainTestControl.UpdateTimer(DateTime.Now - start);
                 var result = task.Result;
 
                 mainTestControl.SetStatus(result.Success ? TestStatus.Succeeded : TestStatus.Failed);

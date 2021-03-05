@@ -60,6 +60,11 @@ namespace ConnectionStringTest.UI
             }
         }
 
+        public void UpdateTimer(TimeSpan elapsedTime)
+        {
+            timeLabel.Text = $"{(int)elapsedTime.TotalSeconds}.{elapsedTime.Milliseconds.ToString("000")}";
+        }
+
         private async void fireTestButton_Click(object sender, EventArgs e)
         {
             foreach(var handler in handlers)
