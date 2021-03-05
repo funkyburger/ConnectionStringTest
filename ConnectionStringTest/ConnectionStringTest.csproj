@@ -95,9 +95,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\statusIcon.success.bmp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\tick.png" />
   </ItemGroup>
   <ItemGroup>
