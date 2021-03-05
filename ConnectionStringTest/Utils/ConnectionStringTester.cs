@@ -12,17 +12,17 @@ namespace ConnectionStringTest.Utils
     {
         public static async Task<TestResponse> Test(string connectionString)
         {
-            using (var connection = new SqlConnection(connectionString))
+            try
             {
-                try
+                using (var connection = new SqlConnection(connectionString))
                 {
                     await connection.OpenAsync();
                     return new TestResponse(true, "Connected successfully.");
                 }
-                catch(Exception e)
-                {
-                    return new TestResponse(false, e.Message);
-                }
+            }
+            catch (Exception e)
+            {
+                return new TestResponse(false, e.Message);
             }
         }
     }
