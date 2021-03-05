@@ -42,7 +42,22 @@ namespace ConnectionStringTest.UI
 
         public void SetStatus(TestStatus status)
         {
-            statusIcon.Image = (Image)resourceManager.GetObject("statusIcon.loading");
+            if(status == TestStatus.Succeeded)
+            {
+                statusIcon.Image = (Image)resourceManager.GetObject("statusIcon.success");
+            }
+            else if (status == TestStatus.Failed)
+            {
+                statusIcon.Image = (Image)resourceManager.GetObject("statusIcon.failure");
+            }
+            else if (status == TestStatus.Pending)
+            {
+                statusIcon.Image = (Image)resourceManager.GetObject("statusIcon.loading");
+            }
+            else
+            {
+                throw new Exception($"No icon found for status '{status}'.");
+            }
         }
 
         private async void fireTestButton_Click(object sender, EventArgs e)
