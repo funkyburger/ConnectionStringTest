@@ -13,14 +13,14 @@ namespace ConnectionStringTest.UI
 {
     public partial class MainTestControl : UserControl
     {
-        private readonly IList<Handler> uiEventHandlers;
+        private readonly IList<Handler> handlers;
 
         public string ConnectionString => connectionStringBox.Text;
 
         public MainTestControl()
         {
             InitializeComponent();
-            uiEventHandlers = new List<Handler>();
+            handlers = new List<Handler>();
             testResultLabel.Text = string.Empty;
         }
 
@@ -32,14 +32,14 @@ namespace ConnectionStringTest.UI
             testResultLabel.Text = message;
         }
 
-        public void AddUiEventHandler(Handler handler)
+        public void AddHandler(Handler handler)
         {
-            uiEventHandlers.Add(handler);
+            handlers.Add(handler);
         }
 
         private void fireTestButton_Click(object sender, EventArgs e)
         {
-            foreach(var handler in uiEventHandlers)
+            foreach(var handler in handlers)
             {
                 handler.Handle(Event.TestButtonClicked, this);
             }
