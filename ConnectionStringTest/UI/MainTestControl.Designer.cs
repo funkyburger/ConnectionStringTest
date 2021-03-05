@@ -43,6 +43,7 @@ namespace ConnectionStringTest.UI
             this.connectionStringBox.Name = "connectionStringBox";
             this.connectionStringBox.Size = new System.Drawing.Size(776, 20);
             this.connectionStringBox.TabIndex = 1;
+            this.connectionStringBox.TextChanged += new System.EventHandler(this.connectionStringBox_TextChanged);
             // 
             // fireTestButton
             // 

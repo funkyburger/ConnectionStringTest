@@ -25,6 +25,7 @@ namespace ConnectionStringTest.UI
             InitializeComponent();
             handlers = new List<IEventHandler>();
             testResultLabel.Text = string.Empty;
+            fireTestButton.Enabled = false;
         }
 
         public void DisplayMessage(string message, bool success = true)
@@ -74,6 +75,11 @@ namespace ConnectionStringTest.UI
             {
                 await handler.Handle(Event.TestButtonClicked, this);
             }
+        }
+
+        private void connectionStringBox_TextChanged(object sender, EventArgs e)
+        {
+            fireTestButton.Enabled = !string.IsNullOrEmpty(connectionStringBox.Text);
         }
     }
 }
