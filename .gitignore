@@ -5,3 +5,4 @@
 /.vs
 /ConnectionStringTest/obj
 /ConnectionStringTest/bin/Debug
+/ConnectionStringTest/ConnectionStringTest.csproj.user
