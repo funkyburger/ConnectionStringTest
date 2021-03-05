@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ConnectionStringTest.Event
+namespace ConnectionStringTest.EventHandling
 {
-    public interface IUiEventHandler
+    public interface Handler
     {
-        void Handle(UiEvent uievent, UserControl sender);
+        void Handle(Event uievent, UserControl sender);
     }
 }

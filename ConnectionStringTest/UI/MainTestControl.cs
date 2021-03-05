@@ -1,4 +1,4 @@
-﻿using ConnectionStringTest.Event;
+﻿using ConnectionStringTest.EventHandling;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,14 +13,14 @@ namespace ConnectionStringTest.UI
 {
     public partial class MainTestControl : UserControl
     {
-        private IList<IUiEventHandler> uiEventHandlers;
+        private readonly IList<Handler> uiEventHandlers;
 
         public string ConnectionString => connectionStringBox.Text;
 
         public MainTestControl()
         {
             InitializeComponent();
-            uiEventHandlers = new List<IUiEventHandler>();
+            uiEventHandlers = new List<Handler>();
             testResultLabel.Text = string.Empty;
         }
 
@@ -32,7 +32,7 @@ namespace ConnectionStringTest.UI
             testResultLabel.Text = message;
         }
 
-        public void AddUiEventHandler(IUiEventHandler handler)
+        public void AddUiEventHandler(Handler handler)
         {
             uiEventHandlers.Add(handler);
         }
@@ -41,7 +41,7 @@ namespace ConnectionStringTest.UI
         {
             foreach(var handler in uiEventHandlers)
             {
-                handler.Handle(UiEvent.TestButtonClicked, this);
+                handler.Handle(Event.TestButtonClicked, this);
             }
         }
     }

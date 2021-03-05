@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ConnectionStringTest.Event
+namespace ConnectionStringTest.EventHandling
 {
-    public class TestButtonClickHandler : IUiEventHandler
+    public class TestButtonClickHandler : Handler
     {
         public MainForm MainForm { get; private set; }
 
@@ -18,9 +18,9 @@ namespace ConnectionStringTest.Event
             MainForm = mainForm;
         }
 
-        public void Handle(UiEvent uievent, UserControl sender)
+        public void Handle(Event uievent, UserControl sender)
         {
-            if(uievent != UiEvent.TestButtonClicked)
+            if(uievent != Event.TestButtonClicked)
             {
                 return;
             }

@@ -1,4 +1,4 @@
-﻿using ConnectionStringTest.Event;
+﻿using ConnectionStringTest.EventHandling;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

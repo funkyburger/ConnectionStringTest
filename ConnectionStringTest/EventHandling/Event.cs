@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConnectionStringTest.Event
+namespace ConnectionStringTest.EventHandling
 {
-    public enum UiEvent
+    public enum Event
     {
-        TestButtonClicked
+        TestButtonClicked,
+        TestCompleted
     }
 }
