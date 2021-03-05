@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace ConnectionStringTest.EventHandling
 {
-    public interface Handler
+    public interface IEventHandler
     {
         Task Handle(Event uievent, UserControl sender);
     }

@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Utils\ConnectionStringTester.cs" />
-    <Compile Include="EventHandling\Handler.cs" />
+    <Compile Include="EventHandling\IEventHandler.cs" />
     <Compile Include="EventHandling\TestButtonClickHandler.cs" />
     <Compile Include="EventHandling\Event.cs" />
     <Compile Include="Program.cs" />

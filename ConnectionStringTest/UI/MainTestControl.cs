@@ -13,14 +13,14 @@ namespace ConnectionStringTest.UI
 {
     public partial class MainTestControl : UserControl
     {
-        private readonly IList<Handler> handlers;
+        private readonly IList<IEventHandler> handlers;
 
         public string ConnectionString => connectionStringBox.Text;
 
         public MainTestControl()
         {
             InitializeComponent();
-            handlers = new List<Handler>();
+            handlers = new List<IEventHandler>();
             testResultLabel.Text = string.Empty;
         }
 
@@ -32,7 +32,7 @@ namespace ConnectionStringTest.UI
             testResultLabel.Text = message;
         }
 
-        public void AddHandler(Handler handler)
+        public void AddHandler(IEventHandler handler)
         {
             handlers.Add(handler);
         }

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace ConnectionStringTest.EventHandling
 {
-    public class TestButtonClickHandler : Handler
+    public class TestButtonClickHandler : IEventHandler
     {
         public MainForm MainForm { get; private set; }
 
