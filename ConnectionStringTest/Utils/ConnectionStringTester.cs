@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ConnectionStringTest.Utils
 {
     public static class ConnectionStringTester
     {
-        public static TestResponse Test(string connectionString)
+        public static async Task<TestResponse> Test(string connectionString)
         {
             using (var connection = new SqlConnection(connectionString))
             {
                 try
                 {
-                    connection.Open();
+                    await connection.OpenAsync();
                     return new TestResponse(true, "Connected successfully.");
                 }
                 catch(Exception e)

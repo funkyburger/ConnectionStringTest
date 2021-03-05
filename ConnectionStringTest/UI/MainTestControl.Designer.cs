@@ -32,6 +32,9 @@ namespace ConnectionStringTest.UI
             this.connectionStringBox = new System.Windows.Forms.TextBox();
             this.fireTestButton = new System.Windows.Forms.Button();
             this.testResultLabel = new System.Windows.Forms.Label();
+            this.statusIcon = new System.Windows.Forms.PictureBox();
+            this.timeLabel = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.statusIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // connectionStringBox
@@ -60,15 +63,37 @@ namespace ConnectionStringTest.UI
             this.testResultLabel.TabIndex = 3;
             this.testResultLabel.Text = "-Test result label-";
             // 
+            // statusIcon
+            // 
+            this.statusIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.statusIcon.Location = new System.Drawing.Point(762, 32);
+            this.statusIcon.Name = "statusIcon";
+            this.statusIcon.Size = new System.Drawing.Size(17, 17);
+            this.statusIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.statusIcon.TabIndex = 4;
+            this.statusIcon.TabStop = false;
+            // 
+            // timeLabel
+            // 
+            this.timeLabel.AutoSize = true;
+            this.timeLabel.Location = new System.Drawing.Point(712, 34);
+            this.timeLabel.Name = "timeLabel";
+            this.timeLabel.Size = new System.Drawing.Size(34, 13);
+            this.timeLabel.TabIndex = 5;
+            this.timeLabel.Text = "0.000";
+            // 
             // MainTestControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.timeLabel);
+            this.Controls.Add(this.statusIcon);
             this.Controls.Add(this.testResultLabel);
             this.Controls.Add(this.fireTestButton);
             this.Controls.Add(this.connectionStringBox);
             this.Name = "MainTestControl";
             this.Size = new System.Drawing.Size(785, 60);
+            ((System.ComponentModel.ISupportInitialize)(this.statusIcon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -79,5 +104,7 @@ namespace ConnectionStringTest.UI
         private System.Windows.Forms.TextBox connectionStringBox;
         private System.Windows.Forms.Button fireTestButton;
         private System.Windows.Forms.Label testResultLabel;
+        private System.Windows.Forms.PictureBox statusIcon;
+        private System.Windows.Forms.Label timeLabel;
     }
 }

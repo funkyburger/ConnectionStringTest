@@ -1,4 +1,5 @@
-﻿using ConnectionStringTest.Event;
+﻿using ConnectionStringTest.Data;
+using ConnectionStringTest.EventHandling;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,14 +14,16 @@ namespace ConnectionStringTest.UI
 {
     public partial class MainTestControl : UserControl
     {
-        private IList<IUiEventHandler> uiEventHandlers;
+        private readonly ComponentResourceManager resourceManager = new ComponentResourceManager(typeof(MainTestControl));
+
+        private readonly IList<IEventHandler> handlers;
 
         public string ConnectionString => connectionStringBox.Text;
 
         public MainTestControl()
         {
             InitializeComponent();
-            uiEventHandlers = new List<IUiEventHandler>();
+            handlers = new List<IEventHandler>();
             testResultLabel.Text = string.Empty;
         }
 
@@ -32,16 +35,44 @@ namespace ConnectionStringTest.UI
             testResultLabel.Text = message;
         }
 
-        public void AddUiEventHandler(IUiEventHandler handler)
+        public void AddHandler(IEventHandler handler)
         {
-            uiEventHandlers.Add(handler);
+            handlers.Add(handler);
         }
 
-        private void fireTestButton_Click(object sender, EventArgs e)
+        public void SetStatus(TestStatus status)
         {
-            foreach(var handler in uiEventHandlers)
+            if(status == TestStatus.Succeeded)
             {
-                handler.Handle(UiEvent.TestButtonClicked, this);
+                statusIcon.Image = (Image)resourceManager.GetObject("statusIcon.success");
+                fireTestButton.Enabled = true;
+            }
+            else if (status == TestStatus.Failed)
+            {
+                statusIcon.Image = (Image)resourceManager.GetObject("statusIcon.failure");
+                fireTestButton.Enabled = true;
+            }
+            else if (status == TestStatus.Pending)
+            {
+                statusIcon.Image = (Image)resourceManager.GetObject("statusIcon.loading");
+                fireTestButton.Enabled = false;
+            }
+            else
+            {
+                throw new Exception($"No icon found for status '{status}'.");
+            }
+        }
+
+        public void UpdateTimer(TimeSpan elapsedTime)
+        {
+            timeLabel.Text = $"{(int)elapsedTime.TotalSeconds}.{elapsedTime.Milliseconds.ToString("000")}";
+        }
+
+        private async void fireTestButton_Click(object sender, EventArgs e)
+        {
+            foreach(var handler in handlers)
+            {
+                await handler.Handle(Event.TestButtonClicked, this);
             }
         }
     }
