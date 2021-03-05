@@ -45,14 +45,17 @@ namespace ConnectionStringTest.UI
             if(status == TestStatus.Succeeded)
             {
                 statusIcon.Image = (Image)resourceManager.GetObject("statusIcon.success");
+                fireTestButton.Enabled = true;
             }
             else if (status == TestStatus.Failed)
             {
                 statusIcon.Image = (Image)resourceManager.GetObject("statusIcon.failure");
+                fireTestButton.Enabled = true;
             }
             else if (status == TestStatus.Pending)
             {
                 statusIcon.Image = (Image)resourceManager.GetObject("statusIcon.loading");
+                fireTestButton.Enabled = false;
             }
             else
             {
