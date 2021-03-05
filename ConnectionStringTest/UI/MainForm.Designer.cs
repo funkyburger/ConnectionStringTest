@@ -45,6 +45,8 @@ namespace ConnectionStringTest.UI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(786, 71);
             this.Controls.Add(this.mainTestControl);
+            this.MaximumSize = new System.Drawing.Size(802, 110);
+            this.MinimumSize = new System.Drawing.Size(802, 110);
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.ResumeLayout(false);
