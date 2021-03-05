@@ -1,4 +1,5 @@
-﻿using ConnectionStringTest.UI;
+﻿using ConnectionStringTest.Data;
+using ConnectionStringTest.UI;
 using ConnectionStringTest.Utils;
 using System;
 using System.Collections.Generic;
@@ -20,19 +21,24 @@ namespace ConnectionStringTest.EventHandling
 
         public async Task Handle(Event uievent, UserControl sender)
         {
-            if(uievent != Event.TestButtonClicked)
+            if (uievent != Event.TestButtonClicked)
             {
                 return;
             }
 
             var mainTestControl = sender as MainTestControl;
-             await Task.Run(() => {
+            mainTestControl.SetStatus(TestStatus.Pending);
+
+            await Task.Run(() =>
+            {
                 var task = ConnectionStringTester.Test(mainTestControl.ConnectionString);
                 while (!task.IsCompleted)
                 {
                 }
 
                 var result = task.Result;
+
+                mainTestControl.SetStatus(result.Success ? TestStatus.Succeeded : TestStatus.Failed);
 
                 mainTestControl.DisplayMessage(result.Message, result.Success);
             });

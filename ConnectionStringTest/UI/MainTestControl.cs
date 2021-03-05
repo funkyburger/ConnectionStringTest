@@ -1,4 +1,5 @@
-﻿using ConnectionStringTest.EventHandling;
+﻿using ConnectionStringTest.Data;
+using ConnectionStringTest.EventHandling;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,8 @@ namespace ConnectionStringTest.UI
 {
     public partial class MainTestControl : UserControl
     {
+        private readonly ComponentResourceManager resourceManager = new ComponentResourceManager(typeof(MainTestControl));
+
         private readonly IList<IEventHandler> handlers;
 
         public string ConnectionString => connectionStringBox.Text;
@@ -35,6 +38,11 @@ namespace ConnectionStringTest.UI
         public void AddHandler(IEventHandler handler)
         {
             handlers.Add(handler);
+        }
+
+        public void SetStatus(TestStatus status)
+        {
+            statusIcon.Image = (Image)resourceManager.GetObject("statusIcon.loading");
         }
 
         private async void fireTestButton_Click(object sender, EventArgs e)
