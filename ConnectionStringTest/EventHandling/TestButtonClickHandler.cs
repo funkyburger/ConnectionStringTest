@@ -18,7 +18,7 @@ namespace ConnectionStringTest.EventHandling
             MainForm = mainForm;
         }
 
-        public void Handle(Event uievent, UserControl sender)
+        public async Task Handle(Event uievent, UserControl sender)
         {
             if(uievent != Event.TestButtonClicked)
             {
@@ -26,9 +26,16 @@ namespace ConnectionStringTest.EventHandling
             }
 
             var mainTestControl = sender as MainTestControl;
-            var result = ConnectionStringTester.Test(mainTestControl.ConnectionString);
+             await Task.Run(() => {
+                var task = ConnectionStringTester.Test(mainTestControl.ConnectionString);
+                while (!task.IsCompleted)
+                {
+                }
 
-            mainTestControl.DisplayMessage(result.Message, result.Success);
+                var result = task.Result;
+
+                mainTestControl.DisplayMessage(result.Message, result.Success);
+            });
         }
     }
 }

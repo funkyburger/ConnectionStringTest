@@ -37,11 +37,11 @@ namespace ConnectionStringTest.UI
             handlers.Add(handler);
         }
 
-        private void fireTestButton_Click(object sender, EventArgs e)
+        private async void fireTestButton_Click(object sender, EventArgs e)
         {
             foreach(var handler in handlers)
             {
-                handler.Handle(Event.TestButtonClicked, this);
+                await handler.Handle(Event.TestButtonClicked, this);
             }
         }
     }

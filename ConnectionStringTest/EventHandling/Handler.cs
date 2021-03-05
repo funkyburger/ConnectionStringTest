@@ -9,6 +9,6 @@ namespace ConnectionStringTest.EventHandling
 {
     public interface Handler
     {
-        void Handle(Event uievent, UserControl sender);
+        Task Handle(Event uievent, UserControl sender);
     }
 }
