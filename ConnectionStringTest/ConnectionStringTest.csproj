@@ -50,6 +50,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationModule.cs" />
+    <Compile Include="Data\ApplicationData.cs" />
+    <Compile Include="Data\ApplicationDataFileSection.cs" />
+    <Compile Include="Data\ApplicationDataSerializer.cs" />
+    <Compile Include="Data\ApplicationDataService.cs" />
+    <Compile Include="Data\FileService.cs" />
+    <Compile Include="Data\IApplicationDataSerializer.cs" />
+    <Compile Include="Data\IApplicationDataService.cs" />
+    <Compile Include="Data\IFileService.cs" />
     <Compile Include="Data\TestStatus.cs" />
     <Compile Include="Utils\ConnectionStringTester.cs" />
     <Compile Include="EventHandling\IEventHandler.cs" />
