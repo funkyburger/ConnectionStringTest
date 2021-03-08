@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace ConnectionStringTest.Utils
 {
-    public static class ConnectionStringTester
+    public class ConnectionStringTester : IConnectionStringTester
     {
-        public static async Task<TestResponse> Test(string connectionString)
+        public async Task<TestResponse> Test(string connectionString)
         {
             try
             {
