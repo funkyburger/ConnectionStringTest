@@ -1,4 +1,5 @@
 ﻿using ConnectionStringTest.EventHandling;
+using ConnectionStringTest.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,10 +14,10 @@ namespace ConnectionStringTest.UI
 {
     public partial class MainForm : Form
     {
-        public MainForm()
+        public MainForm(IConnectionStringTester connectionStringTester)
         {
             InitializeComponent();
-            mainTestControl.AddHandler(new TestButtonClickHandler(this));
+            mainTestControl.AddHandler(new TestButtonClickHandler(connectionStringTester, this));
         }
     }
 }

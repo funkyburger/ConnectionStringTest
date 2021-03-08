@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ConnectionStringTest.UI;
+using Ninject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,9 +16,12 @@ namespace ConnectionStringTest
         [STAThread]
         static void Main()
         {
+            var module = new ApplicationModule();
+            var kernel = new StandardKernel(module);
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new UI.MainForm());
+            Application.Run(kernel.Get<MainForm>());
         }
     }
 }

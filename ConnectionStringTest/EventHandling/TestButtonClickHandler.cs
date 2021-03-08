@@ -12,10 +12,13 @@ namespace ConnectionStringTest.EventHandling
 {
     public class TestButtonClickHandler : IEventHandler
     {
+        private readonly IConnectionStringTester _connectionStringTester;
+
         public MainForm MainForm { get; private set; }
 
-        public TestButtonClickHandler(MainForm mainForm)
+        public TestButtonClickHandler(IConnectionStringTester connectionStringTester, MainForm mainForm)
         {
+            _connectionStringTester = connectionStringTester;
             MainForm = mainForm;
         }
 
@@ -33,7 +36,7 @@ namespace ConnectionStringTest.EventHandling
             {
                 var start = DateTime.Now;
                 mainTestControl.UpdateTimer(TimeSpan.Zero);
-                var task = ConnectionStringTester.Test(mainTestControl.ConnectionString);
+                var task = _connectionStringTester.Test(mainTestControl.ConnectionString);
                 while (!task.IsCompleted)
                 {
                     mainTestControl.UpdateTimer(DateTime.Now - start);
