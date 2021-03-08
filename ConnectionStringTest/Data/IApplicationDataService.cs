@@ -8,5 +8,7 @@ namespace ConnectionStringTest.Data
 {
     public interface IApplicationDataService
     {
+        ApplicationData GetApplicationData();
+        void UpdateApplicationData(ApplicationData data);
     }
 }
