@@ -9,8 +9,6 @@ namespace ConnectionStringTest.Data
 {
     public class ApplicationDataSerializer : IApplicationDataSerializer
     {
-        //private readonly Regex SectionRegex = new Regex( "^[]$");
-
         public ApplicationData Deserialize(string dataString)
         {
             var currentSection = ApplicationDataFileSection.None;
