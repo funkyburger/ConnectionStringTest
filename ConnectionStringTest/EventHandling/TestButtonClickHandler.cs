@@ -49,6 +49,8 @@ namespace ConnectionStringTest.EventHandling
 
                 mainTestControl.DisplayMessage(result.Message, result.Success);
             });
+
+            mainTestControl.RefreshAutoComplete();
         }
     }
 }

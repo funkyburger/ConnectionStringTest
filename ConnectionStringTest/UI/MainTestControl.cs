@@ -15,17 +15,24 @@ namespace ConnectionStringTest.UI
     public partial class MainTestControl : UserControl
     {
         private readonly ComponentResourceManager resourceManager = new ComponentResourceManager(typeof(MainTestControl));
+        private readonly IApplicationDataService _applicationDataService;
 
         private readonly IList<IEventHandler> handlers;
 
         public string ConnectionString => connectionStringBox.Text;
 
-        public MainTestControl()
+        public MainTestControl(IApplicationDataService applicationDataService)
         {
             InitializeComponent();
+            _applicationDataService = applicationDataService;
             handlers = new List<IEventHandler>();
             testResultLabel.Text = string.Empty;
             fireTestButton.Enabled = false;
+
+            connectionStringBox.AutoCompleteMode = AutoCompleteMode.Suggest;
+            connectionStringBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+            RefreshAutoComplete();
         }
 
         public void DisplayMessage(string message, bool success = true)
@@ -62,6 +69,13 @@ namespace ConnectionStringTest.UI
             {
                 throw new Exception($"No icon found for status '{status}'.");
             }
+        }
+
+        public void RefreshAutoComplete()
+        {
+            connectionStringBox.AutoCompleteCustomSource.Clear();
+            connectionStringBox.AutoCompleteCustomSource.AddRange(_applicationDataService.GetApplicationData()
+                .History.ToArray());
         }
 
         public void UpdateTimer(TimeSpan elapsedTime)
