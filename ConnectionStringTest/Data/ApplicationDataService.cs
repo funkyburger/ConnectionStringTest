@@ -11,6 +11,21 @@ namespace ConnectionStringTest.Data
         private readonly IFileService _fileService;
         private readonly IApplicationDataSerializer _serializer;
 
+        private ApplicationData cachedApplicationData = null;
+        private ApplicationData CachedApplicationData
+        {
+            get
+            {
+                if(cachedApplicationData == null)
+                {
+                    var content = _fileService.LoadApplicationDataFileContent();
+                    cachedApplicationData = _serializer.Deserialize(content);
+                }
+
+                return cachedApplicationData;
+            }
+        }
+
         public ApplicationDataService(IFileService fileService, IApplicationDataSerializer serializer)
         {
             _fileService = fileService;
@@ -19,13 +34,14 @@ namespace ConnectionStringTest.Data
 
         public ApplicationData GetApplicationData()
         {
-            var content = _fileService.LoadApplicationDataFileContent();
-
-            return _serializer.Deserialize(content);
+            return CachedApplicationData;
         }
 
         public void UpdateApplicationData(ApplicationData data)
         {
+            // Invalidate cache
+            cachedApplicationData = null;
+
             var content = _serializer.Serialize(data);
 
             _fileService.SaveApplicationDataFileContent(content);
