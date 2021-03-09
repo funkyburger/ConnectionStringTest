@@ -29,7 +29,7 @@ namespace ConnectionStringTest.UI
         /// </summary>
         private void InitializeComponent()
         {
-            this.mainTestControl = new ConnectionStringTest.UI.MainTestControl();
+            this.mainTestControl = DiContainer.Resolve<ConnectionStringTest.UI.MainTestControl>();
             this.SuspendLayout();
             // 
             // mainTestControl

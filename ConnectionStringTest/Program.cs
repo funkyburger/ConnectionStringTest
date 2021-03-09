@@ -19,9 +19,11 @@ namespace ConnectionStringTest
             var module = new ApplicationModule();
             var kernel = new StandardKernel(module);
 
+            DiContainer.Wire(kernel);
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(kernel.Get<MainForm>());
+            Application.Run(DiContainer.Resolve<MainForm>());
         }
     }
 }

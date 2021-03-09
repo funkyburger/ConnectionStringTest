@@ -59,6 +59,7 @@
     <Compile Include="Data\IApplicationDataService.cs" />
     <Compile Include="Data\IFileService.cs" />
     <Compile Include="Data\TestStatus.cs" />
+    <Compile Include="DiContainer.cs" />
     <Compile Include="Utils\ConnectionStringTester.cs" />
     <Compile Include="EventHandling\IEventHandler.cs" />
     <Compile Include="EventHandling\TestButtonClickHandler.cs" />
