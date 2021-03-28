@@ -12,10 +12,12 @@ namespace ConnectionStringTest
         public override void Load()
         {
             Bind(typeof(Utils.IConnectionStringTester)).To(typeof(Utils.ConnectionStringTester));
-            
+            Bind(typeof(Utils.IConnectionStringCleaner)).To(typeof(Utils.ConnectionStringCleaner));
+
             Bind(typeof(Data.IFileService)).To(typeof(Data.FileService));
             Bind(typeof(Data.IApplicationDataService)).To(typeof(Data.ApplicationDataService));
             Bind(typeof(Data.IApplicationDataSerializer)).To(typeof(Data.ApplicationDataSerializer));
+
         }
     }
 }

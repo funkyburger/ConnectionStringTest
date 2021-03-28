@@ -14,10 +14,10 @@ namespace ConnectionStringTest.UI
 {
     public partial class MainForm : Form
     {
-        public MainForm(IConnectionStringTester connectionStringTester)
+        public MainForm(IConnectionStringTester connectionStringTester, IConnectionStringCleaner connectionStringCleaner)
         {
             InitializeComponent();
-            mainTestControl.AddHandler(new TestButtonClickHandler(connectionStringTester, this));
+            mainTestControl.AddHandler(new TestButtonClickHandler(connectionStringTester, connectionStringCleaner, this));
         }
     }
 }
