@@ -60,6 +60,7 @@
     <Compile Include="Data\IFileService.cs" />
     <Compile Include="Data\TestStatus.cs" />
     <Compile Include="DiContainer.cs" />
+    <Compile Include="Utils\ConnectionStringCleaner.cs" />
     <Compile Include="Utils\ConnectionStringTester.cs" />
     <Compile Include="EventHandling\IEventHandler.cs" />
     <Compile Include="EventHandling\TestButtonClickHandler.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="UI\MainTestControl.Designer.cs">
       <DependentUpon>MainTestControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\IConnectionStringCleaner.cs" />
     <Compile Include="Utils\IConnectionStringTester.cs" />
     <EmbeddedResource Include="UI\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
