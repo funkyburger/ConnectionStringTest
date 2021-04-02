@@ -1,4 +1,6 @@
 ﻿
+using System.Windows.Forms;
+
 namespace ConnectionStringTest.UI
 {
     partial class MainTestControl
@@ -34,6 +36,7 @@ namespace ConnectionStringTest.UI
             this.testResultLabel = new System.Windows.Forms.Label();
             this.statusIcon = new System.Windows.Forms.PictureBox();
             this.timeLabel = new System.Windows.Forms.Label();
+            this.actionButton = new ActionButton();
             ((System.ComponentModel.ISupportInitialize)(this.statusIcon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -41,7 +44,7 @@ namespace ConnectionStringTest.UI
             // 
             this.connectionStringBox.Location = new System.Drawing.Point(3, 3);
             this.connectionStringBox.Name = "connectionStringBox";
-            this.connectionStringBox.Size = new System.Drawing.Size(776, 20);
+            this.connectionStringBox.Size = new System.Drawing.Size(753, 20);
             this.connectionStringBox.TabIndex = 1;
             this.connectionStringBox.TextChanged += new System.EventHandler(this.connectionStringBox_TextChanged);
             // 
@@ -82,11 +85,12 @@ namespace ConnectionStringTest.UI
             this.timeLabel.Size = new System.Drawing.Size(34, 13);
             this.timeLabel.TabIndex = 5;
             this.timeLabel.Text = "0.000";
-            // 
+             // 
             // MainTestControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.actionButton);
             this.Controls.Add(this.timeLabel);
             this.Controls.Add(this.statusIcon);
             this.Controls.Add(this.testResultLabel);
@@ -107,5 +111,6 @@ namespace ConnectionStringTest.UI
         private System.Windows.Forms.Label testResultLabel;
         private System.Windows.Forms.PictureBox statusIcon;
         private System.Windows.Forms.Label timeLabel;
+        private System.Windows.Forms.Button actionButton;
     }
 }

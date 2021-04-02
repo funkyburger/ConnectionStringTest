@@ -60,6 +60,9 @@
     <Compile Include="Data\IFileService.cs" />
     <Compile Include="Data\TestStatus.cs" />
     <Compile Include="DiContainer.cs" />
+    <Compile Include="UI\ActionButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Utils\ConnectionStringCleaner.cs" />
     <Compile Include="Utils\ConnectionStringTester.cs" />
     <Compile Include="EventHandling\IEventHandler.cs" />
@@ -120,6 +123,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\firetest.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
