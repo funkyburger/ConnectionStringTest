@@ -1,8 +1,8 @@
 ﻿using ConnectionStringTest.Data;
 using ConnectionStringTest.EventHandling;
+using ConnectionStringTest.Exceptions;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -12,9 +12,8 @@ using System.Windows.Forms;
 
 namespace ConnectionStringTest.UI
 {
-    public partial class MainTestControl : UserControl
+    public partial class MainTestControl : UserControl, IMainTestControl
     {
-        private readonly ComponentResourceManager resourceManager = new ComponentResourceManager(typeof(MainTestControl));
         private readonly IApplicationDataService _applicationDataService;
 
         private readonly IList<IEventHandler> handlers;
@@ -27,7 +26,7 @@ namespace ConnectionStringTest.UI
             _applicationDataService = applicationDataService;
             handlers = new List<IEventHandler>();
             testResultLabel.Text = string.Empty;
-            fireTestButton.Enabled = false;
+            actionButton.Enabled = false;
 
             connectionStringBox.AutoCompleteMode = AutoCompleteMode.Suggest;
             connectionStringBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
@@ -52,18 +51,23 @@ namespace ConnectionStringTest.UI
         {
             if(status == TestStatus.Succeeded)
             {
-                statusIcon.Image = (Image)resourceManager.GetObject("statusIcon.success");
-                fireTestButton.Enabled = true;
+                statusIcon.Image = Properties.Resources.statusIcon_success;
+                actionButton.CurrentAction = ActionButton.Action.FireTest;
             }
             else if (status == TestStatus.Failed)
             {
-                statusIcon.Image = (Image)resourceManager.GetObject("statusIcon.failure");
-                fireTestButton.Enabled = true;
+                statusIcon.Image = Properties.Resources.statusIcon_failure;
+                actionButton.CurrentAction = ActionButton.Action.FireTest;
             }
             else if (status == TestStatus.Pending)
             {
-                statusIcon.Image = (Image)resourceManager.GetObject("statusIcon.loading");
-                fireTestButton.Enabled = false;
+                statusIcon.Image = Properties.Resources.statusIcon_loading;
+                actionButton.CurrentAction = ActionButton.Action.Cancel;
+            }
+            else if (status == TestStatus.Cancelled)
+            {
+                statusIcon.Image = Properties.Resources.statusIcon_failure;
+                actionButton.CurrentAction = ActionButton.Action.FireTest;
             }
             else
             {
@@ -87,13 +91,35 @@ namespace ConnectionStringTest.UI
         {
             foreach(var handler in handlers)
             {
-                await handler.Handle(Event.TestButtonClicked, this);
+                await handler.Handle(Event.TestFired, this);
             }
         }
 
         private void connectionStringBox_TextChanged(object sender, EventArgs e)
         {
-            fireTestButton.Enabled = !string.IsNullOrEmpty(connectionStringBox.Text);
+            actionButton.Enabled = !string.IsNullOrEmpty(connectionStringBox.Text);
+        }
+
+        private async void actionButtonClicked(object sender, EventArgs e)
+        {
+            Event eVent;
+            if(actionButton.CurrentAction == ActionButton.Action.FireTest)
+            {
+                eVent = Event.TestFired;
+            }
+            else if (actionButton.CurrentAction == ActionButton.Action.Cancel)
+            {
+                eVent = Event.TestCancelled;
+            }
+            else
+            {
+                throw new UnhandledEnumException(actionButton.CurrentAction);
+            }
+
+            foreach (var handler in handlers)
+            {
+                await handler.Handle(eVent, this);
+            }
         }
     }
 }
