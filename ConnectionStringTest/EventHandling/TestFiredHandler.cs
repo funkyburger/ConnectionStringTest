@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace ConnectionStringTest.EventHandling
 {
-    public class TestButtonClickHandler : IEventHandler
+    public class TestFiredHandler : IEventHandler
     {
         private readonly IConnectionStringTester _connectionStringTester;
         private readonly IConnectionStringCleaner _connectionStringCleaner;
@@ -21,7 +21,7 @@ namespace ConnectionStringTest.EventHandling
         
         public bool TestPending { get; private set; }
 
-        public TestButtonClickHandler(IConnectionStringTester connectionStringTester, IConnectionStringCleaner connectionStringCleaner)
+        public TestFiredHandler(IConnectionStringTester connectionStringTester, IConnectionStringCleaner connectionStringCleaner)
         {
             _connectionStringTester = connectionStringTester;
             _connectionStringCleaner = connectionStringCleaner;

@@ -14,7 +14,7 @@ using ConnectionStringTest.UI;
 namespace ConnectionStringTest.UnitTests.EventHandling
 {
     [TestClass]
-    public class TestButtonClickHandlerTests
+    public class TestFiredHandlerTests
     {
         [TestMethod]
         public async Task HandlerDisplaysResultsOnSuccess()
@@ -27,7 +27,7 @@ namespace ConnectionStringTest.UnitTests.EventHandling
 
             var mainControlMock = new Mock<IMainTestControl>(); 
 
-            var handler = new TestButtonClickHandler(stringTesterMock.Object, stringCleanerMock.Object);
+            var handler = new TestFiredHandler(stringTesterMock.Object, stringCleanerMock.Object);
 
             await handler.Handle(Event.TestFired, mainControlMock.Object);
 
@@ -46,7 +46,7 @@ namespace ConnectionStringTest.UnitTests.EventHandling
 
             var mainControlMock = new Mock<IMainTestControl>();
 
-            var handler = new TestButtonClickHandler(stringTesterMock.Object, stringCleanerMock.Object);
+            var handler = new TestFiredHandler(stringTesterMock.Object, stringCleanerMock.Object);
 
             await handler.Handle(Event.TestFired, mainControlMock.Object);
 
@@ -61,7 +61,7 @@ namespace ConnectionStringTest.UnitTests.EventHandling
 
             var mainControlMock = new Mock<IMainTestControl>();
 
-            var handler = new TestButtonClickHandler(new DelayedConnectionStringTester(), stringCleanerMock.Object);
+            var handler = new TestFiredHandler(new DelayedConnectionStringTester(), stringCleanerMock.Object);
 
             await handler.Handle(Event.TestFired, mainControlMock.Object);
             await handler.Handle(Event.TestCancelled, mainControlMock.Object);

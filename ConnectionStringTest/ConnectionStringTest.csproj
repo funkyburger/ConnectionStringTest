@@ -68,7 +68,7 @@
     <Compile Include="Utils\ConnectionStringCleaner.cs" />
     <Compile Include="Utils\ConnectionStringTester.cs" />
     <Compile Include="EventHandling\IEventHandler.cs" />
-    <Compile Include="EventHandling\TestButtonClickHandler.cs" />
+    <Compile Include="EventHandling\TestFiredHandler.cs" />
     <Compile Include="EventHandling\Event.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
