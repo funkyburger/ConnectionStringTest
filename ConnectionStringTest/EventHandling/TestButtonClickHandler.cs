@@ -55,7 +55,9 @@ namespace ConnectionStringTest.EventHandling
             cancelationTokenSource = new CancellationTokenSource();
             mainTestControl.SetStatus(TestStatus.Pending);
 
-            await Task.Run(() =>
+            // This is intended
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            Task.Run(() =>
             {
                 var start = DateTime.Now;
                 mainTestControl.UpdateTimer(TimeSpan.Zero);
@@ -80,6 +82,7 @@ namespace ConnectionStringTest.EventHandling
 
                 mainTestControl.DisplayMessage(result.Message, result.Success);
             });
+#pragma warning restore CS4014
 
             mainTestControl.RefreshAutoComplete();
             TestPending = false;

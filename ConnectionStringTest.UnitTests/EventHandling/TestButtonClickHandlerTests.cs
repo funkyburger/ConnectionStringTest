@@ -57,14 +57,6 @@ namespace ConnectionStringTest.UnitTests.EventHandling
         [TestMethod]
         public async Task HandlerCancelsTheTestProperly()
         {
-            //var stringTesterMock = new Mock<IConnectionStringTester>();
-            //stringTesterMock.Setup(t => t.Test(It.IsAny<string>()))
-            //    .ReturnsAsync(async () => {
-            //        await Task.Delay(10000);
-            //        return new TestResponse(true, "too long, too bad ..."); 
-            //    });
-            //var stringTester = new Bidule();
-
             var stringCleanerMock = new Mock<IConnectionStringCleaner>();
 
             var mainControlMock = new Mock<IMainTestControl>();
@@ -77,7 +69,8 @@ namespace ConnectionStringTest.UnitTests.EventHandling
             mainControlMock.Verify(c => c.SetStatus(TestStatus.Succeeded), Times.Never);
             mainControlMock.Verify(c => c.DisplayMessage(It.IsAny<string>(), true), Times.Never);
 
-            //mainControlMock.Verify(c => c.UpdateTimer(It.IsAny<TimeSpan>()), Times.Never);
+            mainControlMock.Verify(c => c.SetStatus(TestStatus.Cancelled), Times.Once);
+            mainControlMock.Verify(c => c.DisplayMessage(It.IsAny<string>(), false), Times.Once);
         }
 
         private class DelayedConnectionStringTester : IConnectionStringTester
