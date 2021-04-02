@@ -26,7 +26,7 @@ namespace ConnectionStringTest.UI
             _applicationDataService = applicationDataService;
             handlers = new List<IEventHandler>();
             testResultLabel.Text = string.Empty;
-            fireTestButton.Enabled = false;
+            actionButton.Enabled = false;
 
             connectionStringBox.AutoCompleteMode = AutoCompleteMode.Suggest;
             connectionStringBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
@@ -52,25 +52,21 @@ namespace ConnectionStringTest.UI
             if(status == TestStatus.Succeeded)
             {
                 statusIcon.Image = Properties.Resources.statusIcon_success;
-                fireTestButton.Enabled = true;
                 actionButton.CurrentAction = ActionButton.Action.FireTest;
             }
             else if (status == TestStatus.Failed)
             {
                 statusIcon.Image = Properties.Resources.statusIcon_failure;
-                fireTestButton.Enabled = true;
                 actionButton.CurrentAction = ActionButton.Action.FireTest;
             }
             else if (status == TestStatus.Pending)
             {
                 statusIcon.Image = Properties.Resources.statusIcon_loading;
-                fireTestButton.Enabled = false;
                 actionButton.CurrentAction = ActionButton.Action.Cancel;
             }
             else if (status == TestStatus.Cancelled)
             {
                 statusIcon.Image = Properties.Resources.statusIcon_failure;
-                fireTestButton.Enabled = true;
                 actionButton.CurrentAction = ActionButton.Action.FireTest;
             }
             else
@@ -101,7 +97,7 @@ namespace ConnectionStringTest.UI
 
         private void connectionStringBox_TextChanged(object sender, EventArgs e)
         {
-            fireTestButton.Enabled = !string.IsNullOrEmpty(connectionStringBox.Text);
+            actionButton.Enabled = !string.IsNullOrEmpty(connectionStringBox.Text);
         }
 
         private async void actionButtonClicked(object sender, EventArgs e)
