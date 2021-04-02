@@ -11,12 +11,12 @@ namespace ConnectionStringTest.UI
     {
         public ActionButton()
         {
-            BackgroundImage = global::ConnectionStringTest.Properties.Resources.firetest;
-            BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            BackgroundImage = Properties.Resources.firetest;
+            BackgroundImageLayout = ImageLayout.Stretch;
             CausesValidation = false;
             FlatAppearance.BorderSize = 0;
             Location = new System.Drawing.Point(757, 2);
-            Margin = new System.Windows.Forms.Padding(0);
+            Margin = new Padding(0);
             Name = "actionButton";
             Size = new System.Drawing.Size(22, 22);
             TabIndex = 6;
