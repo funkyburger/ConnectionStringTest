@@ -49,6 +49,9 @@ namespace ConnectionStringTest.UI
             this.MinimumSize = new System.Drawing.Size(802, 110);
             this.Name = "MainForm";
             this.Text = "MainForm";
+
+            this.Icon = ConnectionStringTest.Properties.Resources.Icon;
+
             this.ResumeLayout(false);
 
         }
