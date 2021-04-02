@@ -2,7 +2,6 @@
 using ConnectionStringTest.EventHandling;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -14,7 +13,6 @@ namespace ConnectionStringTest.UI
 {
     public partial class MainTestControl : UserControl
     {
-        private readonly ComponentResourceManager resourceManager = new ComponentResourceManager(typeof(MainTestControl));
         private readonly IApplicationDataService _applicationDataService;
 
         private readonly IList<IEventHandler> handlers;
@@ -52,17 +50,17 @@ namespace ConnectionStringTest.UI
         {
             if(status == TestStatus.Succeeded)
             {
-                statusIcon.Image = (Image)resourceManager.GetObject("statusIcon.success");
+                statusIcon.Image = Properties.Resources.statusIcon_success;
                 fireTestButton.Enabled = true;
             }
             else if (status == TestStatus.Failed)
             {
-                statusIcon.Image = (Image)resourceManager.GetObject("statusIcon.failure");
+                statusIcon.Image = Properties.Resources.statusIcon_failure;
                 fireTestButton.Enabled = true;
             }
             else if (status == TestStatus.Pending)
             {
-                statusIcon.Image = (Image)resourceManager.GetObject("statusIcon.loading");
+                statusIcon.Image = Properties.Resources.statusIcon_loading;
                 fireTestButton.Enabled = false;
             }
             else

@@ -79,5 +79,35 @@ namespace ConnectionStringTest.Properties {
                 return ((System.Drawing.Icon)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap statusIcon_failure {
+            get {
+                object obj = ResourceManager.GetObject("statusIcon.failure", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap statusIcon_loading {
+            get {
+                object obj = ResourceManager.GetObject("statusIcon.loading", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap statusIcon_success {
+            get {
+                object obj = ResourceManager.GetObject("statusIcon.success", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
