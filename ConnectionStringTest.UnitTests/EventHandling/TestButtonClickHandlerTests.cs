@@ -29,7 +29,7 @@ namespace ConnectionStringTest.UnitTests.EventHandling
 
             var handler = new TestButtonClickHandler(stringTesterMock.Object, stringCleanerMock.Object);
 
-            await handler.Handle(Event.TestButtonClicked, mainControlMock.Object);
+            await handler.Handle(Event.TestFired, mainControlMock.Object);
 
             mainControlMock.Verify(c => c.SetStatus(TestStatus.Succeeded), Times.Once);
             mainControlMock.Verify(c => c.DisplayMessage(It.IsAny<string>(), true), Times.Once);
@@ -48,7 +48,7 @@ namespace ConnectionStringTest.UnitTests.EventHandling
 
             var handler = new TestButtonClickHandler(stringTesterMock.Object, stringCleanerMock.Object);
 
-            await handler.Handle(Event.TestButtonClicked, mainControlMock.Object);
+            await handler.Handle(Event.TestFired, mainControlMock.Object);
 
             mainControlMock.Verify(c => c.SetStatus(TestStatus.Failed), Times.Once);
             mainControlMock.Verify(c => c.DisplayMessage(It.IsAny<string>(), false), Times.Once);
@@ -63,7 +63,7 @@ namespace ConnectionStringTest.UnitTests.EventHandling
 
             var handler = new TestButtonClickHandler(new DelayedConnectionStringTester(), stringCleanerMock.Object);
 
-            await handler.Handle(Event.TestButtonClicked, mainControlMock.Object);
+            await handler.Handle(Event.TestFired, mainControlMock.Object);
             await handler.Handle(Event.TestCancelled, mainControlMock.Object);
 
             mainControlMock.Verify(c => c.SetStatus(TestStatus.Succeeded), Times.Never);

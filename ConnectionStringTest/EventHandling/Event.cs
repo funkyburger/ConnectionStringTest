@@ -8,7 +8,7 @@ namespace ConnectionStringTest.EventHandling
 {
     public enum Event
     {
-        TestButtonClicked,
+        TestFired,
         TestCompleted,
         TestCancelled
     }

@@ -91,7 +91,7 @@ namespace ConnectionStringTest.UI
         {
             foreach(var handler in handlers)
             {
-                await handler.Handle(Event.TestButtonClicked, this);
+                await handler.Handle(Event.TestFired, this);
             }
         }
 
@@ -105,7 +105,7 @@ namespace ConnectionStringTest.UI
             Event eVent;
             if(actionButton.CurrentAction == ActionButton.Action.FireTest)
             {
-                eVent = Event.TestButtonClicked;
+                eVent = Event.TestFired;
             }
             else if (actionButton.CurrentAction == ActionButton.Action.Cancel)
             {

@@ -30,7 +30,7 @@ namespace ConnectionStringTest.EventHandling
 
         public async Task Handle(Event uievent, object sender)
         {
-            if(uievent == Event.TestButtonClicked)
+            if(uievent == Event.TestFired)
             {
                 await FireTest(sender as IMainTestControl);
             }
@@ -42,14 +42,12 @@ namespace ConnectionStringTest.EventHandling
             {
                 throw new UnhandledEnumException(uievent);
             }
-
-            if (uievent != Event.TestButtonClicked)
-            {
-                return;
-            }
         }
 
+        // Intended to make async test possible.
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         private async Task FireTest(IMainTestControl mainTestControl)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             TestPending = true;
             cancelationTokenSource = new CancellationTokenSource();
