@@ -49,6 +49,11 @@ namespace ConnectionStringTest.EventHandling
         private async Task FireTest(IMainTestControl mainTestControl)
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
+            if (TestPending)
+            {
+                throw new Exception("A test is alredy underway.");
+            }
+
             TestPending = true;
             cancelationTokenSource = new CancellationTokenSource();
             mainTestControl.SetStatus(TestStatus.Pending);
@@ -68,6 +73,7 @@ namespace ConnectionStringTest.EventHandling
                         mainTestControl.SetStatus(TestStatus.Cancelled);
 
                         mainTestControl.DisplayMessage("Cancelled", false);
+                        TestPending = false;
                         return;
                     }
                     mainTestControl.UpdateTimer(DateTime.Now - start);
@@ -79,11 +85,11 @@ namespace ConnectionStringTest.EventHandling
                 mainTestControl.SetStatus(result.Success ? TestStatus.Succeeded : TestStatus.Failed);
 
                 mainTestControl.DisplayMessage(result.Message, result.Success);
+                TestPending = false;
             });
 #pragma warning restore CS4014
 
             mainTestControl.RefreshAutoComplete();
-            TestPending = false;
         }
 
         private async Task CancelTest()
