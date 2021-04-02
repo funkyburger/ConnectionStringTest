@@ -91,6 +91,7 @@
   <ItemGroup>
     <Compile Include="Data\ApplicationDataSerializerTests.cs" />
     <Compile Include="Data\ApplicationDataServiceTests.cs" />
+    <Compile Include="EventHandling\TestButtonClickHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\ConnectionStringCleanerTests.cs" />
   </ItemGroup>

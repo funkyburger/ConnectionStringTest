@@ -1,5 +1,6 @@
 ﻿using ConnectionStringTest.Data;
 using ConnectionStringTest.EventHandling;
+using ConnectionStringTest.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,7 +12,7 @@ using System.Windows.Forms;
 
 namespace ConnectionStringTest.UI
 {
-    public partial class MainTestControl : UserControl
+    public partial class MainTestControl : UserControl, IMainTestControl
     {
         private readonly IApplicationDataService _applicationDataService;
 
@@ -52,16 +53,25 @@ namespace ConnectionStringTest.UI
             {
                 statusIcon.Image = Properties.Resources.statusIcon_success;
                 fireTestButton.Enabled = true;
+                actionButton.CurrentAction = ActionButton.Action.FireTest;
             }
             else if (status == TestStatus.Failed)
             {
                 statusIcon.Image = Properties.Resources.statusIcon_failure;
                 fireTestButton.Enabled = true;
+                actionButton.CurrentAction = ActionButton.Action.FireTest;
             }
             else if (status == TestStatus.Pending)
             {
                 statusIcon.Image = Properties.Resources.statusIcon_loading;
                 fireTestButton.Enabled = false;
+                actionButton.CurrentAction = ActionButton.Action.Cancel;
+            }
+            else if (status == TestStatus.Cancelled)
+            {
+                statusIcon.Image = Properties.Resources.statusIcon_failure;
+                fireTestButton.Enabled = true;
+                actionButton.CurrentAction = ActionButton.Action.FireTest;
             }
             else
             {
@@ -92,6 +102,28 @@ namespace ConnectionStringTest.UI
         private void connectionStringBox_TextChanged(object sender, EventArgs e)
         {
             fireTestButton.Enabled = !string.IsNullOrEmpty(connectionStringBox.Text);
+        }
+
+        private async void actionButtonClicked(object sender, EventArgs e)
+        {
+            Event eVent;
+            if(actionButton.CurrentAction == ActionButton.Action.FireTest)
+            {
+                eVent = Event.TestButtonClicked;
+            }
+            else if (actionButton.CurrentAction == ActionButton.Action.Cancel)
+            {
+                eVent = Event.TestCancelled;
+            }
+            else
+            {
+                throw new UnhandledEnumException(actionButton.CurrentAction);
+            }
+
+            foreach (var handler in handlers)
+            {
+                await handler.Handle(eVent, this);
+            }
         }
     }
 }

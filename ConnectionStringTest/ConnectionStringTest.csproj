@@ -60,9 +60,11 @@
     <Compile Include="Data\IFileService.cs" />
     <Compile Include="Data\TestStatus.cs" />
     <Compile Include="DiContainer.cs" />
+    <Compile Include="Exceptions\UnhandledEnumException.cs" />
     <Compile Include="UI\ActionButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\IMainTestControl.cs" />
     <Compile Include="Utils\ConnectionStringCleaner.cs" />
     <Compile Include="Utils\ConnectionStringTester.cs" />
     <Compile Include="EventHandling\IEventHandler.cs" />
@@ -129,6 +131,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\loading.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\canceltest.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

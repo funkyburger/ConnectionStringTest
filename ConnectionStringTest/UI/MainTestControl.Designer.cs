@@ -36,7 +36,7 @@ namespace ConnectionStringTest.UI
             this.testResultLabel = new System.Windows.Forms.Label();
             this.statusIcon = new System.Windows.Forms.PictureBox();
             this.timeLabel = new System.Windows.Forms.Label();
-            this.actionButton = new ActionButton();
+            this.actionButton = new ConnectionStringTest.UI.ActionButton();
             ((System.ComponentModel.ISupportInitialize)(this.statusIcon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -85,7 +85,11 @@ namespace ConnectionStringTest.UI
             this.timeLabel.Size = new System.Drawing.Size(34, 13);
             this.timeLabel.TabIndex = 5;
             this.timeLabel.Text = "0.000";
-             // 
+            // 
+            // actionButton
+            // 
+            this.actionButton.Click += new System.EventHandler(this.actionButtonClicked);
+            // 
             // MainTestControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -111,6 +115,6 @@ namespace ConnectionStringTest.UI
         private System.Windows.Forms.Label testResultLabel;
         private System.Windows.Forms.PictureBox statusIcon;
         private System.Windows.Forms.Label timeLabel;
-        private System.Windows.Forms.Button actionButton;
+        private ActionButton actionButton;
     }
 }

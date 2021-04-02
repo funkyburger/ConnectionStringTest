@@ -10,6 +10,7 @@ namespace ConnectionStringTest.Data
     {
         Succeeded,
         Failed,
-        Pending
+        Pending,
+        Cancelled
     }
 }
