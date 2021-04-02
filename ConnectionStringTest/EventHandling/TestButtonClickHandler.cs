@@ -15,13 +15,10 @@ namespace ConnectionStringTest.EventHandling
         private readonly IConnectionStringTester _connectionStringTester;
         private readonly IConnectionStringCleaner _connectionStringCleaner;
 
-        public MainForm MainForm { get; private set; }
-
-        public TestButtonClickHandler(IConnectionStringTester connectionStringTester, IConnectionStringCleaner connectionStringCleaner, MainForm mainForm)
+        public TestButtonClickHandler(IConnectionStringTester connectionStringTester, IConnectionStringCleaner connectionStringCleaner)
         {
             _connectionStringTester = connectionStringTester;
             _connectionStringCleaner = connectionStringCleaner;
-            MainForm = mainForm;
         }
 
         public async Task Handle(Event uievent, UserControl sender)
