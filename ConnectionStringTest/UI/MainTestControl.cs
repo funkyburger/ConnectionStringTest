@@ -1,6 +1,7 @@
 ﻿using ConnectionStringTest.Data;
 using ConnectionStringTest.EventHandling;
 using ConnectionStringTest.Exceptions;
+using ConnectionStringTest.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,15 +16,17 @@ namespace ConnectionStringTest.UI
     public partial class MainTestControl : UserControl, IMainTestControl
     {
         private readonly IApplicationDataService _applicationDataService;
+        private readonly IThreadSafeHandler _threadSafeHandler;
 
         private readonly IList<IEventHandler> handlers;
 
         public string ConnectionString => connectionStringBox.Text;
 
-        public MainTestControl(IApplicationDataService applicationDataService)
+        public MainTestControl(IApplicationDataService applicationDataService, IThreadSafeHandler threadSafeHandler)
         {
             InitializeComponent();
             _applicationDataService = applicationDataService;
+            _threadSafeHandler = threadSafeHandler;
             handlers = new List<IEventHandler>();
             testResultLabel.Text = string.Empty;
             actionButton.Enabled = false;
@@ -39,7 +42,7 @@ namespace ConnectionStringTest.UI
             var color = success ? Color.Black : Color.Red;
 
             testResultLabel.ForeColor = color;
-            testResultLabel.Text = message;
+            _threadSafeHandler.WriteInLabel(testResultLabel, message);
         }
 
         public void AddHandler(IEventHandler handler)
@@ -84,7 +87,7 @@ namespace ConnectionStringTest.UI
 
         public void UpdateTimer(TimeSpan elapsedTime)
         {
-            timeLabel.Text = $"{(int)elapsedTime.TotalSeconds}.{elapsedTime.Milliseconds.ToString("000")}";
+            _threadSafeHandler.WriteInLabel(timeLabel, $"{(int)elapsedTime.TotalSeconds}.{elapsedTime.Milliseconds:000}");
         }
 
         private async void fireTestButton_Click(object sender, EventArgs e)

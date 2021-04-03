@@ -87,6 +87,8 @@
     </Compile>
     <Compile Include="Utils\IConnectionStringCleaner.cs" />
     <Compile Include="Utils\IConnectionStringTester.cs" />
+    <Compile Include="Utils\IThreadSafeHandler.cs" />
+    <Compile Include="Utils\ThreadSafeHandler.cs" />
     <EmbeddedResource Include="UI\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
