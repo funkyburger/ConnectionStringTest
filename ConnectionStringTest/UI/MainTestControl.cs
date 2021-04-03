@@ -90,14 +90,6 @@ namespace ConnectionStringTest.UI
             _threadSafeHandler.WriteInLabel(timeLabel, $"{(int)elapsedTime.TotalSeconds}.{elapsedTime.Milliseconds:000}");
         }
 
-        private async void fireTestButton_Click(object sender, EventArgs e)
-        {
-            foreach(var handler in handlers)
-            {
-                await handler.Handle(Event.TestFired, this);
-            }
-        }
-
         private void connectionStringBox_TextChanged(object sender, EventArgs e)
         {
             actionButton.Enabled = !string.IsNullOrEmpty(connectionStringBox.Text);
