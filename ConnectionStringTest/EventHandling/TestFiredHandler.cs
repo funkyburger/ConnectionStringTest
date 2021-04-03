@@ -51,14 +51,14 @@ namespace ConnectionStringTest.EventHandling
         {
             if (TestPending)
             {
-                throw new Exception("A test is alredy underway.");
+                throw new Exception("A test is already running.");
             }
 
             TestPending = true;
             cancelationTokenSource = new CancellationTokenSource();
             mainTestControl.SetStatus(TestStatus.Pending);
 
-            // This is intended
+            // This is intended, it should run in background (and is the whole point of making this call chain async)
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             Task.Run(() =>
             {
