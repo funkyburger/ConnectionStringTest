@@ -65,6 +65,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\IMainTestControl.cs" />
+    <Compile Include="UI\ResultLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Utils\ConnectionStringCleaner.cs" />
     <Compile Include="Utils\ConnectionStringStore.cs" />
     <Compile Include="Utils\ConnectionStringTester.cs" />
@@ -90,8 +93,10 @@
     <Compile Include="Utils\IConnectionStringStore.cs" />
     <Compile Include="Utils\IConnectionStringTester.cs" />
     <Compile Include="Utils\IPasswordMasker.cs" />
+    <Compile Include="Utils\IStringCutter.cs" />
     <Compile Include="Utils\IThreadSafeHandler.cs" />
     <Compile Include="Utils\PasswordMasker.cs" />
+    <Compile Include="Utils\StringCutter.cs" />
     <Compile Include="Utils\ThreadSafeHandler.cs" />
     <EmbeddedResource Include="UI\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

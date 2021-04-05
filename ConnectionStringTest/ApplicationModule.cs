@@ -16,6 +16,7 @@ namespace ConnectionStringTest
             Bind(typeof(Utils.IThreadSafeHandler)).To(typeof(Utils.ThreadSafeHandler));
             Bind(typeof(Utils.IConnectionStringStore)).To(typeof(Utils.ConnectionStringStore));
             Bind(typeof(Utils.IPasswordMasker)).To(typeof(Utils.PasswordMasker));
+            Bind(typeof(Utils.IStringCutter)).To(typeof(Utils.StringCutter));
 
             Bind(typeof(Data.IFileService)).To(typeof(Data.FileService));
             Bind(typeof(Data.IApplicationDataService)).To(typeof(Data.ApplicationDataService));
