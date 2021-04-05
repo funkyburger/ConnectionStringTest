@@ -39,10 +39,8 @@ namespace ConnectionStringTest.UI
 
         public void DisplayMessage(string message, bool success = true)
         {
-            var color = success ? Color.Black : Color.Red;
-
-            testResultLabel.ForeColor = color;
-            _threadSafeHandler.WriteInLabel(testResultLabel, message);
+            testResultLabel.IsErrorMessage = !success;
+            testResultLabel.Message = message;
         }
 
         public void AddHandler(IEventHandler handler)

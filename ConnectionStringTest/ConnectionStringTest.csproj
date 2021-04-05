@@ -65,6 +65,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\IMainTestControl.cs" />
+    <Compile Include="UI\ResultLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Utils\ConnectionStringCleaner.cs" />
     <Compile Include="Utils\ConnectionStringStore.cs" />
     <Compile Include="Utils\ConnectionStringTester.cs" />
