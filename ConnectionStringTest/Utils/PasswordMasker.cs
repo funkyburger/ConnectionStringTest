@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ConnectionStringTest.Utils
 {
-    public class PasswordHider : IPasswordHider
+    public class PasswordMasker : IPasswordMasker
     {
         public string Hide(string connectionString)
         {

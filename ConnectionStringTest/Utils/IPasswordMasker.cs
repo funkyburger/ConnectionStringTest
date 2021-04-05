@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConnectionStringTest.Utils
 {
-    public interface IPasswordHider
+    public interface IPasswordMasker
     {
         string Hide(string connectionString);
     }

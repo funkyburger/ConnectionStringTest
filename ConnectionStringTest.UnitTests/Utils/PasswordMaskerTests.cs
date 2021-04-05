@@ -12,12 +12,12 @@ using ConnectionStringTest.Utils;
 namespace ConnectionStringTest.UnitTests.Utils
 {
     [TestClass]
-    public class PasswordHiderTests
+    public class PasswordMaskerTests
     {
         [TestMethod]
         public void HidesPasswordIfNeeded()
         {
-            var hider = new PasswordHider();
+            var hider = new PasswordMasker();
 
             hider.Hide("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;User Id=john.smith; Password=p4$$w0rd;")
                 .ShouldBe("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;User Id=john.smith; Password=●●●●●●●●●;");
@@ -36,7 +36,7 @@ namespace ConnectionStringTest.UnitTests.Utils
         [TestMethod]
         public void DoesntHidePasswordIfNotNeeded()
         {
-            var hider = new PasswordHider();
+            var hider = new PasswordMasker();
 
             hider.Hide("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=C:\\Blah.mdf;Initial Catalog=Blah;Connection Timeout=60;Integrated Security=True;MultipleActiveResultSets=True")
                 .ShouldBe("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=C:\\Blah.mdf;Initial Catalog=Blah;Connection Timeout=60;Integrated Security=True;MultipleActiveResultSets=True");
@@ -45,7 +45,7 @@ namespace ConnectionStringTest.UnitTests.Utils
         [TestMethod]
         public void AddMaskCharIfPassordIsAlreadyHidden()
         {
-            var hider = new PasswordHider();
+            var hider = new PasswordMasker();
 
             hider.Hide("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;User Id=john.smith; Password=●●●●●●●●●;")
                 .ShouldBe("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;User Id=john.smith; Password=●●●●●●●●●●;");
