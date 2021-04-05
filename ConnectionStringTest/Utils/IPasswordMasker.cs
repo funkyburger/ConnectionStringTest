@@ -8,6 +8,6 @@ namespace ConnectionStringTest.Utils
 {
     public interface IPasswordMasker
     {
-        string Hide(string connectionString);
+        string Mask(string connectionString);
     }
 }

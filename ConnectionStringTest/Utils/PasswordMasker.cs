@@ -9,7 +9,7 @@ namespace ConnectionStringTest.Utils
 {
     public class PasswordMasker : IPasswordMasker
     {
-        public string Hide(string connectionString)
+        public string Mask(string connectionString)
         {
             var boundaries = GetHiddenTextBoudaries(connectionString);
 

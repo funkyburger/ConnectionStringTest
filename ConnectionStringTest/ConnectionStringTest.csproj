@@ -66,6 +66,7 @@
     </Compile>
     <Compile Include="UI\IMainTestControl.cs" />
     <Compile Include="Utils\ConnectionStringCleaner.cs" />
+    <Compile Include="Utils\ConnectionStringStore.cs" />
     <Compile Include="Utils\ConnectionStringTester.cs" />
     <Compile Include="EventHandling\IEventHandler.cs" />
     <Compile Include="EventHandling\TestFiredHandler.cs" />

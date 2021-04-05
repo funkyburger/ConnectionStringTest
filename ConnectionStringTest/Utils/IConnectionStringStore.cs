@@ -9,6 +9,6 @@ namespace ConnectionStringTest.Utils
     public interface IConnectionStringStore
     {
         IEnumerable<string> GetConnectionStrings();
-        bool TryGetConnectionStringWithPassword(string connectionString, out string result);
+        string GetConnectionStringWithPassword(string connectionString);
     }
 }
