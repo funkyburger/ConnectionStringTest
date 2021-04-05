@@ -10,6 +10,7 @@ namespace ConnectionStringTest.EventHandling
     {
         TestFired,
         TestCompleted,
-        TestCancelled
+        TestCancelled,
+        MessageCopiedToClipboard
     }
 }

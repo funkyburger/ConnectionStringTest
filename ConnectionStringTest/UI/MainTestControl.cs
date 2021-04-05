@@ -17,22 +17,26 @@ namespace ConnectionStringTest.UI
     {
         private readonly IConnectionStringStore _connectionStringStore;
         private readonly IThreadSafeHandler _threadSafeHandler;
-        
-        private readonly IList<IEventHandler> handlers;
 
         public string ConnectionString => _connectionStringStore.GetConnectionStringWithPassword(connectionStringBox.Text);
 
-        public MainTestControl(IConnectionStringStore connectionStringStore, IThreadSafeHandler threadSafeHandler)
+        public MainTestControl(IConnectionStringStore connectionStringStore, 
+            IThreadSafeHandler threadSafeHandler, 
+            IConnectionStringTester connectionStringTester, 
+            IConnectionStringCleaner connectionStringCleaner)
         {
             InitializeComponent();
             _connectionStringStore = connectionStringStore;
             _threadSafeHandler = threadSafeHandler;
-            handlers = new List<IEventHandler>();
             testResultLabel.Text = string.Empty;
             actionButton.Enabled = false;
+            clipboardButton.Enabled = false;
 
             connectionStringBox.AutoCompleteMode = AutoCompleteMode.Suggest;
             connectionStringBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+            actionButton.AddEventHandler(new TestFiredHandler(connectionStringTester, connectionStringCleaner));
+            actionButton.MainTestControl = this;
 
             RefreshAutoComplete();
         }
@@ -41,11 +45,6 @@ namespace ConnectionStringTest.UI
         {
             testResultLabel.IsErrorMessage = !success;
             testResultLabel.Message = message;
-        }
-
-        public void AddHandler(IEventHandler handler)
-        {
-            handlers.Add(handler);
         }
 
         public void SetStatus(TestStatus status)
@@ -90,28 +89,6 @@ namespace ConnectionStringTest.UI
         private void connectionStringBox_TextChanged(object sender, EventArgs e)
         {
             actionButton.Enabled = !string.IsNullOrEmpty(connectionStringBox.Text);
-        }
-
-        private async void actionButtonClicked(object sender, EventArgs e)
-        {
-            Event eVent;
-            if(actionButton.CurrentAction == ActionButton.Action.FireTest)
-            {
-                eVent = Event.TestFired;
-            }
-            else if (actionButton.CurrentAction == ActionButton.Action.Cancel)
-            {
-                eVent = Event.TestCancelled;
-            }
-            else
-            {
-                throw new UnhandledEnumException(actionButton.CurrentAction);
-            }
-
-            foreach (var handler in handlers)
-            {
-                await handler.Handle(eVent, this);
-            }
         }
     }
 }

@@ -14,10 +14,9 @@ namespace ConnectionStringTest.UI
 {
     public partial class MainForm : Form
     {
-        public MainForm(IConnectionStringTester connectionStringTester, IConnectionStringCleaner connectionStringCleaner)
+        public MainForm()
         {
             InitializeComponent();
-            mainTestControl.AddHandler(new TestFiredHandler(connectionStringTester, connectionStringCleaner));
         }
     }
 }
