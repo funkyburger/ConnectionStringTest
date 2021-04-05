@@ -10,6 +10,7 @@ namespace ConnectionStringTest.UI
     public interface IMainTestControl
     {
         string ConnectionString { get; }
+        string Message { get; }
         void SetStatus(TestStatus status);
         void UpdateTimer(TimeSpan elapsedTime);
         void DisplayMessage(string message, bool success = true);

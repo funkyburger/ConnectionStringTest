@@ -73,6 +73,16 @@ namespace ConnectionStringTest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap copyToClipboard {
+            get {
+                object obj = ResourceManager.GetObject("copyToClipboard", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap firetest {
             get {
                 object obj = ResourceManager.GetObject("firetest", resourceCulture);

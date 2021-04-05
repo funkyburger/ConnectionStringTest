@@ -11,6 +11,11 @@ namespace ConnectionStringTest.Utils
     {
         public string Cut(string str, int maxlength)
         {
+            if(str.Length < maxlength)
+            {
+                return str;
+            }
+
             var nonWordRegex = new Regex("\\W");
             str = str.Substring(0, maxlength);
 

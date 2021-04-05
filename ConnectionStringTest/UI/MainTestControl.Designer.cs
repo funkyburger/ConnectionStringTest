@@ -34,9 +34,10 @@ namespace ConnectionStringTest.UI
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainTestControl));
             this.connectionStringBox = new System.Windows.Forms.TextBox();
             this.testResultLabel = DiContainer.Resolve<ResultLabel>();
+            this.clipboardButton = DiContainer.Resolve<CopyToClipboardButton>();
             this.statusIcon = new System.Windows.Forms.PictureBox();
             this.timeLabel = new System.Windows.Forms.Label();
-            this.actionButton = new ConnectionStringTest.UI.ActionButton();
+            this.actionButton = DiContainer.Resolve<ActionButton>();
             ((System.ComponentModel.ISupportInitialize)(this.statusIcon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,7 +81,6 @@ namespace ConnectionStringTest.UI
             this.actionButton.Size = new System.Drawing.Size(22, 22);
             this.actionButton.TabIndex = 6;
             this.actionButton.UseVisualStyleBackColor = true;
-            this.actionButton.Click += new System.EventHandler(this.actionButtonClicked);
             // 
             // MainTestControl
             // 
@@ -91,6 +91,7 @@ namespace ConnectionStringTest.UI
             this.Controls.Add(this.statusIcon);
             this.Controls.Add(this.testResultLabel);
             this.Controls.Add(this.connectionStringBox);
+            this.Controls.Add(this.clipboardButton);
             this.Name = "MainTestControl";
             this.Size = new System.Drawing.Size(785, 60);
             ((System.ComponentModel.ISupportInitialize)(this.statusIcon)).EndInit();
@@ -106,5 +107,6 @@ namespace ConnectionStringTest.UI
         private System.Windows.Forms.PictureBox statusIcon;
         private System.Windows.Forms.Label timeLabel;
         private ActionButton actionButton;
+        private CopyToClipboardButton clipboardButton;
     }
 }

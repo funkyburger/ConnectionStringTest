@@ -60,8 +60,15 @@
     <Compile Include="Data\IFileService.cs" />
     <Compile Include="Data\TestStatus.cs" />
     <Compile Include="DiContainer.cs" />
+    <Compile Include="EventHandling\MessageCopiedToClipboardHandler.cs" />
     <Compile Include="Exceptions\UnhandledEnumException.cs" />
     <Compile Include="UI\ActionButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\BaseButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\CopyToClipboardButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\IMainTestControl.cs" />
@@ -145,6 +152,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\canceltest.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\copyToClipboard.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
