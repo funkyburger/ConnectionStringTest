@@ -96,6 +96,7 @@
     <Compile Include="Utils\ConnectionStringCleanerTests.cs" />
     <Compile Include="Utils\ConnectionStringStoreTests.cs" />
     <Compile Include="Utils\PasswordMaskerTests.cs" />
+    <Compile Include="Utils\StringCutterTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
