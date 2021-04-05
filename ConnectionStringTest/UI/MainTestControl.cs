@@ -19,6 +19,7 @@ namespace ConnectionStringTest.UI
         private readonly IThreadSafeHandler _threadSafeHandler;
 
         public string ConnectionString => _connectionStringStore.GetConnectionStringWithPassword(connectionStringBox.Text);
+        public string Message => testResultLabel.Message;
 
         public MainTestControl(IConnectionStringStore connectionStringStore, 
             IThreadSafeHandler threadSafeHandler, 
@@ -38,6 +39,9 @@ namespace ConnectionStringTest.UI
             actionButton.AddEventHandler(new TestFiredHandler(connectionStringTester, connectionStringCleaner));
             actionButton.MainTestControl = this;
 
+            clipboardButton.AddEventHandler(new MessageCopiedToClipboardHandler());
+            clipboardButton.MainTestControl = this;
+
             RefreshAutoComplete();
         }
 
@@ -53,21 +57,25 @@ namespace ConnectionStringTest.UI
             {
                 statusIcon.Image = Properties.Resources.statusIcon_success;
                 actionButton.CurrentAction = ActionButton.Action.FireTest;
+                clipboardButton.Enabled = false;
             }
             else if (status == TestStatus.Failed)
             {
                 statusIcon.Image = Properties.Resources.statusIcon_failure;
                 actionButton.CurrentAction = ActionButton.Action.FireTest;
+                clipboardButton.Enabled = true;
             }
             else if (status == TestStatus.Pending)
             {
                 statusIcon.Image = Properties.Resources.statusIcon_loading;
                 actionButton.CurrentAction = ActionButton.Action.Cancel;
+                clipboardButton.Enabled = false;
             }
             else if (status == TestStatus.Cancelled)
             {
                 statusIcon.Image = Properties.Resources.statusIcon_failure;
                 actionButton.CurrentAction = ActionButton.Action.FireTest;
+                clipboardButton.Enabled = false;
             }
             else
             {

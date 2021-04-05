@@ -12,6 +12,8 @@ namespace ConnectionStringTest.UI
     {
         public CopyToClipboardButton()
         {
+            BackgroundImageLayout = ImageLayout.Stretch;
+            BackgroundImage = Properties.Resources.copyToClipboard;
             Location = new System.Drawing.Point(682, 29);
             Name = "copyToClipboardButton1";
             Size = new System.Drawing.Size(22, 22);

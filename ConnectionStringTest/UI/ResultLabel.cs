@@ -23,7 +23,7 @@ namespace ConnectionStringTest.UI
             set
             {
                 message = value;
-                _threadSafeHandler.WriteInLabel(this, _stringCutter.Cut(value, 150));
+                _threadSafeHandler.WriteInLabel(this, _stringCutter.Cut(value, 145));
             }
         }
 
