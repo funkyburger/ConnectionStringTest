@@ -15,17 +15,17 @@ namespace ConnectionStringTest.UI
 {
     public partial class MainTestControl : UserControl, IMainTestControl
     {
-        private readonly IApplicationDataService _applicationDataService;
+        private readonly IConnectionStringStore _connectionStringStore;
         private readonly IThreadSafeHandler _threadSafeHandler;
-
+        
         private readonly IList<IEventHandler> handlers;
 
-        public string ConnectionString => connectionStringBox.Text;
+        public string ConnectionString => _connectionStringStore.GetConnectionStringWithPassword(connectionStringBox.Text);
 
-        public MainTestControl(IApplicationDataService applicationDataService, IThreadSafeHandler threadSafeHandler)
+        public MainTestControl(IConnectionStringStore connectionStringStore, IThreadSafeHandler threadSafeHandler)
         {
             InitializeComponent();
-            _applicationDataService = applicationDataService;
+            _connectionStringStore = connectionStringStore;
             _threadSafeHandler = threadSafeHandler;
             handlers = new List<IEventHandler>();
             testResultLabel.Text = string.Empty;
@@ -81,8 +81,7 @@ namespace ConnectionStringTest.UI
         public void RefreshAutoComplete()
         {
             connectionStringBox.AutoCompleteCustomSource.Clear();
-            connectionStringBox.AutoCompleteCustomSource.AddRange(_applicationDataService.GetApplicationData()
-                .History.ToArray());
+            connectionStringBox.AutoCompleteCustomSource.AddRange(_connectionStringStore.GetConnectionStrings().ToArray());
         }
 
         public void UpdateTimer(TimeSpan elapsedTime)
