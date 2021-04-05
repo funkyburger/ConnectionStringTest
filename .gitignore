@@ -4,4 +4,8 @@
 
 /.vs
 /ConnectionStringTest/obj
-/ConnectionStringTest/bin/Debug
+/ConnectionStringTest/bin
+/ConnectionStringTest/ConnectionStringTest.csproj.user
+/packages
+/ConnectionStringTest.UnitTests/obj
+/ConnectionStringTest.UnitTests/Bin
