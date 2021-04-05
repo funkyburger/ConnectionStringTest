@@ -66,6 +66,7 @@
     </Compile>
     <Compile Include="UI\IMainTestControl.cs" />
     <Compile Include="Utils\ConnectionStringCleaner.cs" />
+    <Compile Include="Utils\ConnectionStringStore.cs" />
     <Compile Include="Utils\ConnectionStringTester.cs" />
     <Compile Include="EventHandling\IEventHandler.cs" />
     <Compile Include="EventHandling\TestFiredHandler.cs" />
@@ -86,8 +87,11 @@
       <DependentUpon>MainTestControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\IConnectionStringCleaner.cs" />
+    <Compile Include="Utils\IConnectionStringStore.cs" />
     <Compile Include="Utils\IConnectionStringTester.cs" />
+    <Compile Include="Utils\IPasswordMasker.cs" />
     <Compile Include="Utils\IThreadSafeHandler.cs" />
+    <Compile Include="Utils\PasswordMasker.cs" />
     <Compile Include="Utils\ThreadSafeHandler.cs" />
     <EmbeddedResource Include="UI\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
