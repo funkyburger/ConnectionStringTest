@@ -64,6 +64,12 @@
     <Compile Include="UI\ActionButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\BaseButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\CopyToClipboardButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\IMainTestControl.cs" />
     <Compile Include="UI\ResultLabel.cs">
       <SubType>Component</SubType>
