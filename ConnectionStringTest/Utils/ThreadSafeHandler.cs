@@ -10,6 +10,7 @@ namespace ConnectionStringTest.Utils
     public class ThreadSafeHandler : IThreadSafeHandler
     {
         private delegate void SafeLabelWriteCallDelegate(Label label, string text);
+        private delegate void SafeSetButtonEnbled(Button button, bool enabled);
 
         public void WriteInLabel(Label label, string text)
         {
@@ -21,6 +22,19 @@ namespace ConnectionStringTest.Utils
             else
             {
                 label.Text = text;
+            }
+        }
+
+        public void SetButtonEnabled(Button button, bool enabled)
+        {
+            if (button.InvokeRequired)
+            {
+                var callDelegate = new SafeSetButtonEnbled(SetButtonEnabled);
+                button.Invoke(callDelegate, new object[] { button, enabled });
+            }
+            else
+            {
+                button.Enabled = enabled;
             }
         }
     }
