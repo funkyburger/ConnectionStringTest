@@ -23,7 +23,7 @@ namespace ConnectionStringTest.Utils
 
         private Tuple<int, int> GetHiddenTextBoudaries(string connectionString)
         {
-            var passwordSegmentRegex = new Regex("(^|;)\\s*Password\\s*=\\s*(?<password>[^\";\\s]+)\\s*($|;)");
+            var passwordSegmentRegex = new Regex("(^|;)\\s*Password\\s*=\\s*(?<password>[^\";\\s]+)($|(\\s*($|;)))");
 
             var matches = passwordSegmentRegex.Matches(connectionString);
 
@@ -38,7 +38,7 @@ namespace ConnectionStringTest.Utils
                 }
             }
 
-            var passwordWithQuotesSegmentRegex = new Regex("(^|;)\\s*Password\\s*=\\s*\"(?<password>[^\"]+)\"\\s*($|;)");
+            var passwordWithQuotesSegmentRegex = new Regex("(^|;)\\s*Password\\s*=\\s*\"(?<password>[^\"]+)($|(\"\\s*($|;)))");
             matches = passwordWithQuotesSegmentRegex.Matches(connectionString);
 
             foreach (Match match in matches)
