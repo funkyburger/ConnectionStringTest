@@ -57,25 +57,25 @@ namespace ConnectionStringTest.UI
             {
                 statusIcon.Image = Properties.Resources.statusIcon_success;
                 actionButton.CurrentAction = ActionButton.Action.FireTest;
-                clipboardButton.Enabled = false;
+                _threadSafeHandler.SetButtonEnabled(clipboardButton, false);
             }
             else if (status == TestStatus.Failed)
             {
                 statusIcon.Image = Properties.Resources.statusIcon_failure;
                 actionButton.CurrentAction = ActionButton.Action.FireTest;
-                clipboardButton.Enabled = true;
+                _threadSafeHandler.SetButtonEnabled(clipboardButton, true);
             }
             else if (status == TestStatus.Pending)
             {
                 statusIcon.Image = Properties.Resources.statusIcon_loading;
                 actionButton.CurrentAction = ActionButton.Action.Cancel;
-                clipboardButton.Enabled = false;
+                _threadSafeHandler.SetButtonEnabled(clipboardButton, false);
             }
             else if (status == TestStatus.Cancelled)
             {
                 statusIcon.Image = Properties.Resources.statusIcon_failure;
                 actionButton.CurrentAction = ActionButton.Action.FireTest;
-                clipboardButton.Enabled = false;
+                _threadSafeHandler.SetButtonEnabled(clipboardButton, false);
             }
             else
             {
