@@ -51,7 +51,7 @@ namespace ConnectionStringTest.EventHandling
         {
             if (TestPending)
             {
-                throw new Exception("A test is already running.");
+                throw new TestAlreadyRunningException();
             }
 
             TestPending = true;

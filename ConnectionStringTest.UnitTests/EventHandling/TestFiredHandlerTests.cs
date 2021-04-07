@@ -10,6 +10,7 @@ using Shouldly;
 using ConnectionStringTest.EventHandling;
 using ConnectionStringTest.Utils;
 using ConnectionStringTest.UI;
+using ConnectionStringTest.Exceptions;
 
 namespace ConnectionStringTest.UnitTests.EventHandling
 {
@@ -110,7 +111,7 @@ namespace ConnectionStringTest.UnitTests.EventHandling
             {
                 await handler.Handle(Event.TestFired, linkedToMainTestControlMock.Object);
             }
-            catch (Exception)
+            catch (TestAlreadyRunningException)
             {
                 exceptionThrown = true;
             }
