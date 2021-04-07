@@ -12,8 +12,6 @@ namespace ConnectionStringTest.UI
     {
         protected readonly IList<IEventHandler> Handlers;
 
-        public IMainTestControl MainTestControl { get; set; }
-
         public ConnectionStringBox()
         {
             Handlers = new List<IEventHandler>();

@@ -2,6 +2,7 @@
 using ConnectionStringTest.UI;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace ConnectionStringTest.EventHandling
 {
     public class ConnectionStringBoxTextChangedHandler : IEventHandler
     {
-        public async Task Handle(Event uievent, object sender)
+        public Task Handle(Event uievent, object sender)
         {
             if(uievent != Event.ConnectionStringBoxTextChanged)
             {
@@ -18,7 +19,13 @@ namespace ConnectionStringTest.EventHandling
             }
 
             var connectionStringBox = sender as ConnectionStringBox;
-            connectionStringBox.MainTestControl.IsActionButtonEnabled = !string.IsNullOrEmpty(connectionStringBox.Text);
+            var mainControl = (connectionStringBox.Parent as IMainTestControl);
+
+            Debug.WriteLine($"New text : '{connectionStringBox.Text}'");
+
+            mainControl.IsActionButtonEnabled = !string.IsNullOrEmpty(connectionStringBox.Text);
+
+            return Task.CompletedTask;
         }
     }
 }

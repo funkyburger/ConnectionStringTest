@@ -49,13 +49,10 @@ namespace ConnectionStringTest.UI
             connectionStringBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
             actionButton.AddEventHandler(new TestFiredHandler(connectionStringTester, connectionStringCleaner));
-            actionButton.MainTestControl = this;
 
             clipboardButton.AddEventHandler(new MessageCopiedToClipboardHandler());
-            clipboardButton.MainTestControl = this;
 
             connectionStringBox.AddEventHandler(new ConnectionStringBoxTextChangedHandler());
-            connectionStringBox.MainTestControl = this;
 
             RefreshAutoComplete();
         }

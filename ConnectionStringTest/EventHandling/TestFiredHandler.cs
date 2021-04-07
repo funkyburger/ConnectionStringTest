@@ -32,7 +32,7 @@ namespace ConnectionStringTest.EventHandling
         {
             if(uievent == Event.TestFired)
             {
-                await FireTest((sender as ActionButton).MainTestControl);
+                await FireTest((sender as ActionButton).Parent as IMainTestControl);
             }
             else if (uievent == Event.TestCancelled)
             {
@@ -92,10 +92,12 @@ namespace ConnectionStringTest.EventHandling
             mainTestControl.RefreshAutoComplete();
         }
 
-        private async Task CancelTest()
+        private Task CancelTest()
         {
             cancelationTokenSource.Cancel();
             TestPending = false;
+
+            return Task.CompletedTask;
         }
     }
 }
