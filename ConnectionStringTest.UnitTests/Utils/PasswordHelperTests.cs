@@ -191,5 +191,54 @@ namespace ConnectionStringTest.UnitTests.Utils
             helper.SetPassword("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;User Id=john.smith; Password=●●●●●●●●●;", null)
                 .ShouldBe("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;User Id=john.smith; Password=;");
         }
+
+        [TestMethod]
+        public void MaskedPasswordAreUpdated()
+        {
+            var helper = new PasswordHelper();
+
+            helper.UpdatePassword("p4$$w0r", "●●●●●●●d").ShouldBe("p4$$w0rd");
+            helper.UpdatePassword("p4$$w0", "●●●●●●rd").ShouldBe("p4$$w0rd");
+            helper.UpdatePassword("p4$$w0rd", "●●●●●●●").ShouldBe("p4$$w0r");
+            helper.UpdatePassword("p4$$w0rd", "●●●●●●").ShouldBe("p4$$w0");
+            helper.UpdatePassword("p4$$w0rd", string.Empty).ShouldBeNull();
+            helper.UpdatePassword("p4$$w0rd", null).ShouldBeNull();
+        }
+
+        [TestMethod]
+        public void UnmaskedPasswordWithGarbleThrowsException()
+        {
+            var exceptionThrown = false;
+            var helper = new PasswordHelper();
+
+            try
+            {
+                helper.UpdatePassword("p4$$w0r", "●●●●●●●●d");
+            }
+            catch (PasswordException)
+            {
+                exceptionThrown = true;
+            }
+
+            exceptionThrown.ShouldBeTrue();
+        }
+
+        [TestMethod]
+        public void UnmaskedPasswordNotMatchingThrowsException()
+        {
+            var exceptionThrown = false;
+            var helper = new PasswordHelper();
+
+            try
+            {
+                helper.UpdatePassword("p4$$w0r", "●●●●●●ad");
+            }
+            catch (PasswordException)
+            {
+                exceptionThrown = true;
+            }
+
+            exceptionThrown.ShouldBeTrue();
+        }
     }
 }

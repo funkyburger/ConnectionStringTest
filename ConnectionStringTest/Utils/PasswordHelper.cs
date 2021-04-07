@@ -11,6 +11,8 @@ namespace ConnectionStringTest.Utils
 {
     public class PasswordHelper : IPasswordHelper
     {
+        private const char MaskCharacter = '\u25CF';
+
         public string Mask(string connectionString)
         {
             var boundaries = GetHiddenTextBoudaries(connectionString);
@@ -51,7 +53,42 @@ namespace ConnectionStringTest.Utils
 
         public string UpdatePassword(string current, string partiallyMasked)
         {
-            throw new NotImplementedException();
+            if(string.IsNullOrEmpty(partiallyMasked))
+            {
+                return null;
+            }
+
+            var builder = new StringBuilder();
+
+            for(int i = 0; i < partiallyMasked.Length; i++)
+            {
+                if(partiallyMasked[i] == MaskCharacter)
+                {
+                    if(string.IsNullOrEmpty(current) || i >= current.Length)
+                    {
+                        throw new PasswordException("Garble left in password");
+                    }
+
+                    builder.Append(current[i]);
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(current) || i >= current.Length)
+                    {
+                        builder.Append(partiallyMasked[i]);
+                    }
+                    else if (current[i] != partiallyMasked[i])
+                    {
+                        throw new PasswordException("Partially masked and current passwords don't match.");
+                    }
+                    else
+                    {
+                        builder.Append(partiallyMasked[i]);
+                    }
+                }
+            }
+
+            return builder.ToString();
         }
 
         private Tuple<int, int> GetHiddenTextBoudaries(string connectionString)
@@ -93,7 +130,7 @@ namespace ConnectionStringTest.Utils
             var maskBuilder = new StringBuilder();
             for (int i = 0; i <= boudaries.Item2; i++)
             {
-                maskBuilder.Append('\u25CF');
+                maskBuilder.Append(MaskCharacter);
             }
 
             return connectionString.OverwriteSegment(maskBuilder.ToString(), boudaries.Item1, boudaries.Item2);
