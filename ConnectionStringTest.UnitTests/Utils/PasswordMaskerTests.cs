@@ -69,5 +69,52 @@ namespace ConnectionStringTest.UnitTests.Utils
             hider.Mask("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;User Id=john.smith; Password=●●●●●●●●●;")
                 .ShouldBe("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;User Id=john.smith; Password=●●●●●●●●●●;");
         }
+
+        [TestMethod]
+        public void ExtractedPasswordIsNullIfNone()
+        {
+            var hider = new PasswordMasker();
+
+            hider.ExtractPassword("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=C:\\Blah.mdf;Initial Catalog=Blah;Connection Timeout=60;Integrated Security=True;MultipleActiveResultSets=True")
+                .ShouldBeNull();
+        }
+
+        [TestMethod]
+        public void ExtractsPasswords()
+        {
+            var hider = new PasswordMasker();
+
+            hider.ExtractPassword("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;User Id=john.smith; Password=p4$$w0rd;")
+                .ShouldBe("p4$$w0rd");
+            hider.ExtractPassword("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;User Id=john.smith; Password=\"p4$$w0rd\";")
+                .ShouldBe("p4$$w0rd");
+            hider.ExtractPassword("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;User Id=john.smith; Password=\"p4$$w0rd\"")
+                .ShouldBe("p4$$w0rd");
+            hider.ExtractPassword("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;User Id=john.smith; Password=p4$$w0rd")
+                .ShouldBe("p4$$w0rd");
+            hider.ExtractPassword("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;          Password        =      \"p4$$w0rd\"        ;User Id=john.smith;")
+                .ShouldBe("p4$$w0rd");
+            hider.ExtractPassword("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;          Password        =      p4$$w0rd        ;User Id=john.smith;")
+                .ShouldBe("p4$$w0rd");
+        }
+
+        [TestMethod]
+        public void ExtractsPasswordsWhileTyping()
+        {
+            var hider = new PasswordMasker();
+
+            hider.ExtractPassword("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;User Id=john.smith; Password=p4$$")
+                .ShouldBe("p4$$");
+            hider.ExtractPassword("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;User Id=john.smith; Password=\"p4$$")
+                .ShouldBe("p4$$");
+            hider.ExtractPassword("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;User Id=john.smith; Password=\"p4$$")
+                .ShouldBe("p4$$");
+            hider.ExtractPassword("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;User Id=john.smith; Password=p4$$")
+                .ShouldBe("p4$$");
+            hider.ExtractPassword("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;          Password        =      \"p4$$")
+                .ShouldBe("p4$$");
+            hider.ExtractPassword("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;          Password        =      p4$$")
+                .ShouldBe("p4$$");
+        }
     }
 }

@@ -21,6 +21,17 @@ namespace ConnectionStringTest.Utils
             return connectionString;
         }
 
+        public string ExtractPassword(string connectionString)
+        {
+            var boundaries = GetHiddenTextBoudaries(connectionString);
+
+            if (boundaries != null)
+            {
+                return connectionString.Substring(boundaries.Item1, boundaries.Item2);
+            }
+            return null;
+        }
+
         private Tuple<int, int> GetHiddenTextBoudaries(string connectionString)
         {
             var passwordSegmentRegex = new Regex("(^|;)\\s*Password\\s*=\\s*(?<password>[^\";\\s]+)($|(\\s*($|;)))");

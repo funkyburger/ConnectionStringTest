@@ -9,5 +9,6 @@ namespace ConnectionStringTest.Utils
     public interface IPasswordMasker
     {
         string Mask(string connectionString);
+        string ExtractPassword(string connectionString);
     }
 }
