@@ -62,8 +62,10 @@
     <Compile Include="DiContainer.cs" />
     <Compile Include="EventHandling\ConnectionStringBoxTextChangedHandler.cs" />
     <Compile Include="EventHandling\MessageCopiedToClipboardHandler.cs" />
+    <Compile Include="Exceptions\PasswordException.cs" />
     <Compile Include="Exceptions\TestAlreadyRunningException.cs" />
     <Compile Include="Exceptions\UnhandledEnumException.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="UI\ActionButton.cs">
       <SubType>Component</SubType>
     </Compile>
