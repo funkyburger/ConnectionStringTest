@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConnectionStringTest.Utils
 {
-    public interface IPasswordMasker
+    public interface IPasswordHelper
     {
         string Mask(string connectionString);
         string ExtractPassword(string connectionString);

@@ -11,15 +11,15 @@ namespace ConnectionStringTest.Utils
     public class ConnectionStringStore : IConnectionStringStore
     {
         private readonly IApplicationDataService _applicationDataService;
-        private readonly IPasswordMasker _passwordMasker;
+        private readonly IPasswordHelper _passwordHelper;
 
         
         private readonly Dictionary<string, string> connectionStringsIndex = new Dictionary<string, string>();
 
-        public ConnectionStringStore(IApplicationDataService applicationDataService, IPasswordMasker passwordMasker)
+        public ConnectionStringStore(IApplicationDataService applicationDataService, IPasswordHelper passwordHelper)
         {
             _applicationDataService = applicationDataService;
-            _passwordMasker = passwordMasker;
+            _passwordHelper = passwordHelper;
         }
 
         public IEnumerable<string> GetConnectionStrings()
@@ -28,7 +28,7 @@ namespace ConnectionStringTest.Utils
 
             foreach(var connectionString in data.History)
             {
-                var maskedConnectionString = _passwordMasker.Mask(connectionString);
+                var maskedConnectionString = _passwordHelper.Mask(connectionString);
 
                 if (maskedConnectionString == connectionString)
                 {
@@ -37,7 +37,7 @@ namespace ConnectionStringTest.Utils
 
                 while (connectionStringsIndex.ContainsKey(maskedConnectionString))
                 {
-                    maskedConnectionString = _passwordMasker.Mask(maskedConnectionString);
+                    maskedConnectionString = _passwordHelper.Mask(maskedConnectionString);
                 }
 
                 connectionStringsIndex.Add(maskedConnectionString, connectionString);

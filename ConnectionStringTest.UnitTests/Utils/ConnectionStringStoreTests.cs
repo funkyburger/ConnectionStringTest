@@ -25,11 +25,11 @@ namespace ConnectionStringTest.UnitTests.Utils
                     "toto"
                 }));
 
-            var passwordMaskerMock = new Mock<IPasswordMasker>();
-            passwordMaskerMock.Setup(m => m.Mask(It.IsAny<string>()))
+            var passwordHelperMock = new Mock<IPasswordHelper>();
+            passwordHelperMock.Setup(m => m.Mask(It.IsAny<string>()))
                 .Returns<string>(s => s + "*masked*");
 
-            var store = new ConnectionStringStore(applicationDataServiceMock.Object, passwordMaskerMock.Object);
+            var store = new ConnectionStringStore(applicationDataServiceMock.Object, passwordHelperMock.Object);
             store.GetConnectionStrings().ShouldAllBe(s => s.EndsWith("*masked*"));
         }
 
@@ -44,14 +44,14 @@ namespace ConnectionStringTest.UnitTests.Utils
                     "toto;Password=qwerty3"
                 }));
 
-            var passwordMaskerMock = new Mock<IPasswordMasker>();
-            passwordMaskerMock.Setup(m => m.Mask(It.IsAny<string>()))
+            var passwordHelperMock = new Mock<IPasswordHelper>();
+            passwordHelperMock.Setup(m => m.Mask(It.IsAny<string>()))
                 .Returns<string>(s => {
                     var splitIndex = s.IndexOf('=');
                     return s.Substring(0, splitIndex + 1).PadRight(s.Length + 1, '*');
                 });
 
-            var store = new ConnectionStringStore(applicationDataServiceMock.Object, passwordMaskerMock.Object);
+            var store = new ConnectionStringStore(applicationDataServiceMock.Object, passwordHelperMock.Object);
             var connectionStrings = store.GetConnectionStrings().ToArray();
 
             store.GetConnectionStringWithPassword(connectionStrings.First()).ShouldBe("toto;Password=qwerty1");
