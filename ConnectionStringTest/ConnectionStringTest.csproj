@@ -75,6 +75,7 @@
     <Compile Include="UI\CopyToClipboardButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\ILinkedToMainTestControl.cs" />
     <Compile Include="UI\IMainTestControl.cs" />
     <Compile Include="UI\ResultLabel.cs">
       <SubType>Component</SubType>

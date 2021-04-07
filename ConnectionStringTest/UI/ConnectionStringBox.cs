@@ -8,9 +8,11 @@ using System.Windows.Forms;
 
 namespace ConnectionStringTest.UI
 {
-    public class ConnectionStringBox : TextBox
+    public class ConnectionStringBox : TextBox, ILinkedToMainTestControl
     {
         protected readonly IList<IEventHandler> Handlers;
+
+        public IMainTestControl MainTestControl => Parent as IMainTestControl;
 
         public ConnectionStringBox()
         {

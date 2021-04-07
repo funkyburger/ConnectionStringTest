@@ -32,7 +32,7 @@ namespace ConnectionStringTest.EventHandling
         {
             if(uievent == Event.TestFired)
             {
-                await FireTest((sender as ActionButton).Parent as IMainTestControl);
+                await FireTest((sender as ILinkedToMainTestControl).MainTestControl);
             }
             else if (uievent == Event.TestCancelled)
             {

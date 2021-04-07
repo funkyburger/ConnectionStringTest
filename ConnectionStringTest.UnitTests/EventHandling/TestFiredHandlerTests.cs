@@ -25,11 +25,13 @@ namespace ConnectionStringTest.UnitTests.EventHandling
 
             var stringCleanerMock = new Mock<IConnectionStringCleaner>();
 
-            var mainControlMock = new Mock<IMainTestControl>(); 
+            var mainControlMock = new Mock<IMainTestControl>();
+            var linkedToMainTestControlMock = new Mock<ILinkedToMainTestControl>();
+            linkedToMainTestControlMock.Setup(l => l.MainTestControl).Returns(mainControlMock.Object);
 
             var handler = new TestFiredHandler(stringTesterMock.Object, stringCleanerMock.Object);
 
-            await handler.Handle(Event.TestFired, mainControlMock.Object);
+            await handler.Handle(Event.TestFired, linkedToMainTestControlMock.Object);
 
             // Wait until the test is over
             while (handler.TestPending) { }
@@ -48,10 +50,12 @@ namespace ConnectionStringTest.UnitTests.EventHandling
             var stringCleanerMock = new Mock<IConnectionStringCleaner>();
 
             var mainControlMock = new Mock<IMainTestControl>();
+            var linkedToMainTestControlMock = new Mock<ILinkedToMainTestControl>();
+            linkedToMainTestControlMock.Setup(l => l.MainTestControl).Returns(mainControlMock.Object);
 
             var handler = new TestFiredHandler(stringTesterMock.Object, stringCleanerMock.Object);
 
-            await handler.Handle(Event.TestFired, mainControlMock.Object);
+            await handler.Handle(Event.TestFired, linkedToMainTestControlMock.Object);
 
             // Wait until the test is over
             while (handler.TestPending) { }
@@ -66,11 +70,13 @@ namespace ConnectionStringTest.UnitTests.EventHandling
             var stringCleanerMock = new Mock<IConnectionStringCleaner>();
 
             var mainControlMock = new Mock<IMainTestControl>();
+            var linkedToMainTestControlMock = new Mock<ILinkedToMainTestControl>();
+            linkedToMainTestControlMock.Setup(l => l.MainTestControl).Returns(mainControlMock.Object);
 
             var handler = new TestFiredHandler(new DelayedConnectionStringTester(), stringCleanerMock.Object);
 
-            await handler.Handle(Event.TestFired, mainControlMock.Object);
-            await handler.Handle(Event.TestCancelled, mainControlMock.Object);
+            await handler.Handle(Event.TestFired, linkedToMainTestControlMock.Object);
+            await handler.Handle(Event.TestCancelled, linkedToMainTestControlMock.Object);
 
             // Wait until the test is over
             while (handler.TestPending) { }
@@ -94,13 +100,15 @@ namespace ConnectionStringTest.UnitTests.EventHandling
             var stringCleanerMock = new Mock<IConnectionStringCleaner>();
 
             var mainControlMock = new Mock<IMainTestControl>();
+            var linkedToMainTestControlMock = new Mock<ILinkedToMainTestControl>();
+            linkedToMainTestControlMock.Setup(l => l.MainTestControl).Returns(mainControlMock.Object);
 
             var handler = new TestFiredHandler(stringTesterMock.Object, stringCleanerMock.Object);
 
-            await handler.Handle(Event.TestFired, mainControlMock.Object);
+            await handler.Handle(Event.TestFired, linkedToMainTestControlMock.Object);
             try
             {
-                await handler.Handle(Event.TestFired, mainControlMock.Object);
+                await handler.Handle(Event.TestFired, linkedToMainTestControlMock.Object);
             }
             catch (Exception)
             {

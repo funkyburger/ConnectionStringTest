@@ -19,11 +19,10 @@ namespace ConnectionStringTest.EventHandling
             }
 
             var connectionStringBox = sender as ConnectionStringBox;
-            var mainControl = (connectionStringBox.Parent as IMainTestControl);
-
+            
             Debug.WriteLine($"New text : '{connectionStringBox.Text}'");
 
-            mainControl.IsActionButtonEnabled = !string.IsNullOrEmpty(connectionStringBox.Text);
+            connectionStringBox.MainTestControl.IsActionButtonEnabled = !string.IsNullOrEmpty(connectionStringBox.Text);
 
             return Task.CompletedTask;
         }

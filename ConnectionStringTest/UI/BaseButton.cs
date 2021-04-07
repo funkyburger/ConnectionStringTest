@@ -8,9 +8,11 @@ using System.Windows.Forms;
 
 namespace ConnectionStringTest.UI
 {
-    public abstract class BaseButton : Button
+    public abstract class BaseButton : Button, ILinkedToMainTestControl
     {
         protected readonly IList<IEventHandler> Handlers;
+
+        public IMainTestControl MainTestControl => Parent as IMainTestControl;
 
         protected BaseButton()
         {
