@@ -15,7 +15,6 @@ namespace ConnectionStringTest.UI
 {
     public partial class MainTestControl : UserControl, IMainTestControl
     {
-        private readonly IConnectionStringStore _connectionStringStore;
         private readonly IThreadSafeHandler _threadSafeHandler;
 
         public string ConnectionString => connectionStringBox.UnmaskedConnectionString;
@@ -33,13 +32,11 @@ namespace ConnectionStringTest.UI
             }
         }
 
-        public MainTestControl(IConnectionStringStore connectionStringStore, 
-            IThreadSafeHandler threadSafeHandler, 
+        public MainTestControl(IThreadSafeHandler threadSafeHandler, 
             IConnectionStringTester connectionStringTester, 
             IConnectionStringCleaner connectionStringCleaner)
         {
             InitializeComponent();
-            _connectionStringStore = connectionStringStore;
             _threadSafeHandler = threadSafeHandler;
             testResultLabel.Text = string.Empty;
             actionButton.Enabled = false;
