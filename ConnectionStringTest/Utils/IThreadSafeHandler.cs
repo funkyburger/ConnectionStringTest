@@ -10,5 +10,6 @@ namespace ConnectionStringTest.Utils
     public interface IThreadSafeHandler
     {
         void WriteInLabel(Label label, string text);
+        void SetControlEnabled(Control control, bool enabled);
     }
 }

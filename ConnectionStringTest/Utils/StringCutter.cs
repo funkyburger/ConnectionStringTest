@@ -11,7 +11,7 @@ namespace ConnectionStringTest.Utils
     {
         public string Cut(string str, int maxlength)
         {
-            if(str.Length < maxlength)
+            if(string.IsNullOrEmpty(str) || str.Length < maxlength)
             {
                 return str;
             }

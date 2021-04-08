@@ -32,7 +32,7 @@ namespace ConnectionStringTest.UI
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainTestControl));
-            this.connectionStringBox = new System.Windows.Forms.TextBox();
+            this.connectionStringBox = DiContainer.Resolve<ConnectionStringBox>();
             this.testResultLabel = DiContainer.Resolve<ResultLabel>();
             this.clipboardButton = DiContainer.Resolve<CopyToClipboardButton>();
             this.statusIcon = new System.Windows.Forms.PictureBox();
@@ -47,7 +47,6 @@ namespace ConnectionStringTest.UI
             this.connectionStringBox.Name = "connectionStringBox";
             this.connectionStringBox.Size = new System.Drawing.Size(753, 20);
             this.connectionStringBox.TabIndex = 1;
-            this.connectionStringBox.TextChanged += new System.EventHandler(this.connectionStringBox_TextChanged);
             
             // 
             // statusIcon
@@ -102,7 +101,7 @@ namespace ConnectionStringTest.UI
 
         #endregion
 
-        private System.Windows.Forms.TextBox connectionStringBox;
+        private ConnectionStringBox connectionStringBox;
         private ResultLabel testResultLabel;
         private System.Windows.Forms.PictureBox statusIcon;
         private System.Windows.Forms.Label timeLabel;

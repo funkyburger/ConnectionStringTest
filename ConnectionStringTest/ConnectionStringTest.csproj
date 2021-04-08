@@ -54,29 +54,44 @@
     <Compile Include="Data\ApplicationDataFileSection.cs" />
     <Compile Include="Data\ApplicationDataSerializer.cs" />
     <Compile Include="Data\ApplicationDataService.cs" />
+    <Compile Include="Data\AutoCompleteStringWithPasswordsCollection.cs" />
     <Compile Include="Data\FileService.cs" />
+    <Compile Include="Data\HistoryService.cs" />
     <Compile Include="Data\IApplicationDataSerializer.cs" />
     <Compile Include="Data\IApplicationDataService.cs" />
+    <Compile Include="Data\IAutoCompleteStringWithPasswordsCollection.cs" />
     <Compile Include="Data\IFileService.cs" />
+    <Compile Include="Data\IHistoryService.cs" />
     <Compile Include="Data\TestStatus.cs" />
+    <Compile Include="Data\TextChange.cs" />
     <Compile Include="DiContainer.cs" />
+    <Compile Include="EventHandling\ConnectionStringBoxTextChangedHandler.cs" />
     <Compile Include="EventHandling\MessageCopiedToClipboardHandler.cs" />
+    <Compile Include="Exceptions\PasswordException.cs" />
+    <Compile Include="Exceptions\TestAlreadyRunningException.cs" />
     <Compile Include="Exceptions\UnhandledEnumException.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="UI\ActionButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\BaseButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\ConnectionStringBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\CopyToClipboardButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\ILinkedToMainTestControl.cs" />
     <Compile Include="UI\IMainTestControl.cs" />
+    <Compile Include="UI\PasswordTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\ResultLabel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Utils\ConnectionStringCleaner.cs" />
-    <Compile Include="Utils\ConnectionStringStore.cs" />
     <Compile Include="Utils\ConnectionStringTester.cs" />
     <Compile Include="EventHandling\IEventHandler.cs" />
     <Compile Include="EventHandling\TestFiredHandler.cs" />
@@ -97,12 +112,11 @@
       <DependentUpon>MainTestControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\IConnectionStringCleaner.cs" />
-    <Compile Include="Utils\IConnectionStringStore.cs" />
     <Compile Include="Utils\IConnectionStringTester.cs" />
-    <Compile Include="Utils\IPasswordMasker.cs" />
+    <Compile Include="Utils\IPasswordHelper.cs" />
     <Compile Include="Utils\IStringCutter.cs" />
     <Compile Include="Utils\IThreadSafeHandler.cs" />
-    <Compile Include="Utils\PasswordMasker.cs" />
+    <Compile Include="Utils\PasswordHelper.cs" />
     <Compile Include="Utils\StringCutter.cs" />
     <Compile Include="Utils\ThreadSafeHandler.cs" />
     <EmbeddedResource Include="UI\MainForm.resx">
