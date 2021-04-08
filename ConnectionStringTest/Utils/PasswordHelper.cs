@@ -15,7 +15,6 @@ namespace ConnectionStringTest.Utils
 
         public string Mask(string connectionString)
         {
-            // TODO make it mask multiple passwords
             var boundaries = GetPasswordBoundaries(connectionString);
 
             if(boundaries.Any())
@@ -94,7 +93,6 @@ namespace ConnectionStringTest.Utils
 
         private IEnumerable<Tuple<int, int>> GetPasswordBoundaries(string connectionString)
         {
-            //var result = new List<Tuple<int, int>>();
             var passwordSegmentRegex = new Regex("(^|;)\\s*Password\\s*=\\s*(?<password>[^\";\\s]+)($|(\\s*($|;)))");
 
             var matches = passwordSegmentRegex.Matches(connectionString);
@@ -105,7 +103,6 @@ namespace ConnectionStringTest.Utils
                 {
                     if(group.Name == "password")
                     {
-                        //result.Add(new Tuple<int, int>(group.Index, group.Length));
                         yield return new Tuple<int, int>(group.Index, group.Length);
                     }
                 }
@@ -120,13 +117,10 @@ namespace ConnectionStringTest.Utils
                 {
                     if (group.Name == "password")
                     {
-                        //result.Add(new Tuple<int, int>(group.Index, group.Length));
                         yield return new Tuple<int, int>(group.Index, group.Length);
                     }
                 }
             }
-
-            //return result;
         }
 
         private string Mask(string connectionString, Tuple<int, int> boundaries)
@@ -147,13 +141,6 @@ namespace ConnectionStringTest.Utils
                 connectionString = Mask(connectionString, boundary);
             }
 
-            //var maskBuilder = new StringBuilder();
-            //for (int i = 0; i < boudaries.Item2; i++)
-            //{
-            //    maskBuilder.Append(MaskCharacter);
-            //}
-
-            //return connectionString.OverwriteSegment(maskBuilder.ToString(), boudaries.Item1, boudaries.Item2);
             return connectionString;
         }
     }
