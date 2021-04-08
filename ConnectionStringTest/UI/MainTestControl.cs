@@ -18,7 +18,7 @@ namespace ConnectionStringTest.UI
         private readonly IConnectionStringStore _connectionStringStore;
         private readonly IThreadSafeHandler _threadSafeHandler;
 
-        public string ConnectionString => _connectionStringStore.GetConnectionStringWithPassword(connectionStringBox.Text);
+        public string ConnectionString => connectionStringBox.UnmaskedConnectionString;
         public string Message => testResultLabel.Message;
 
         public bool IsActionButtonEnabled
