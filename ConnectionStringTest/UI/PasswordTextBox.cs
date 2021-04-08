@@ -99,8 +99,6 @@ namespace ConnectionStringTest.UI
 
             if (keyData == (Keys.Control | Keys.V))
             {
-                var pouet = Clipboard.GetText();
-
                 ApplyTextChangeToUnmaskedString(new TextChange()
                 {
                     Beginning = SelectionStart,
@@ -110,11 +108,11 @@ namespace ConnectionStringTest.UI
             }
             if (keyData == (Keys.Control | Keys.Z))
             {
-
+                // TODO
             }
             if (keyData == (Keys.Control | Keys.Y))
             {
-
+                // TODO
             }
             else if (keyData == Keys.Back)
             {
