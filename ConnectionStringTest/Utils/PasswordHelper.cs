@@ -51,9 +51,6 @@ namespace ConnectionStringTest.Utils
 
         private IEnumerable<Tuple<int, int>> GetPasswordBoundaries(string connectionString)
         {
-            //var pouet = new Regex("(?<=(^|;))\\s*Password\\s*=\\s*(?<password>[^\";\\s]+)($|(\\s*($|;)))");
-            //var truc = pouet.Matches(connectionString).Count;
-
             var passwordSegmentRegex = new Regex("(?<=(^|;))\\s*Password\\s*=\\s*(?<password>[^\";\\s]+)($|(\\s*($|;)))");
 
             var matches = passwordSegmentRegex.Matches(connectionString);
