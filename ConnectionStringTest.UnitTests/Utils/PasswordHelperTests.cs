@@ -70,6 +70,8 @@ namespace ConnectionStringTest.UnitTests.Utils
                 .ShouldBe("Data Source=(LocalDb)\\MSSQLLocalDB; Password=\"●●●●●●●\"; Password=●●●●●●●●●●;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;          Password        =      \"●●●●●●●●\"        ;User Id=john.smith;");
             helper.Mask("Data Source=(LocalDb)\\MSSQLLocalDB; Password=\"l3tm31n\"; Password=0penS3s4me;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;          Password        =      p4$$w0rd        ;User Id=john.smith;")
                 .ShouldBe("Data Source=(LocalDb)\\MSSQLLocalDB; Password=\"●●●●●●●\"; Password=●●●●●●●●●●;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;          Password        =      ●●●●●●●●        ;User Id=john.smith;");
+            helper.Mask("Password=scacsac;Password=scacsac;")
+                .ShouldBe("Password=●●●●●●●;Password=●●●●●●●;");
         }
 
         [TestMethod]
@@ -81,7 +83,6 @@ namespace ConnectionStringTest.UnitTests.Utils
                 .ShouldBe("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=C:\\Blah.mdf;Initial Catalog=Blah;Connection Timeout=60;Integrated Security=True;MultipleActiveResultSets=True");
         }
 
-        //AddGarble
         [TestMethod]
         public void AddsAnExtraGarbleChar()
         {
