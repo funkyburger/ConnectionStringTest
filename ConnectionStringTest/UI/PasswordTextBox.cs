@@ -17,19 +17,24 @@ namespace ConnectionStringTest.UI
 
         protected readonly IList<IEventHandler> Handlers;
         protected readonly IPasswordHelper PasswordHelper;
+        protected readonly IHistoryService HistoryService;
 
         public string UnmaskedConnectionString { get; private set; }
 
         private bool lockTextChangedEvent = false;
 
-        public PasswordTextBox(IPasswordHelper passwordHelper)
+        public PasswordTextBox(IPasswordHelper passwordHelper, IHistoryService historyService)
         {
             PasswordHelper = passwordHelper;
+            HistoryService = historyService;
 
             UnmaskedConnectionString = string.Empty;
             Text = string.Empty;
 
             Handlers = new List<IEventHandler>();
+
+            AutoCompleteMode = AutoCompleteMode.Suggest;
+            AutoCompleteSource = AutoCompleteSource.CustomSource;
 
             KeyPress += OnKeyPressedInternal;
             TextChanged += TextChangedInternal;
@@ -38,6 +43,11 @@ namespace ConnectionStringTest.UI
         public void AddEventHandler(IEventHandler handler)
         {
             Handlers.Add(handler);
+        }
+
+        public void RefreshAutoComplete()
+        {
+            AutoCompleteCustomSource = HistoryService.GetAutoComplete() as AutoCompleteStringWithPasswordsCollection;
         }
 
         private async void TextChangedInternal(object sender, EventArgs e)
@@ -53,11 +63,13 @@ namespace ConnectionStringTest.UI
             {
                 if (AutoCompleteCustomSource.Contains(Text))
                 {
+                    var passwordAutoComplete = AutoCompleteCustomSource as IAutoCompleteStringWithPasswordsCollection;
+                    
                     ApplyTextChangeToUnmaskedString(new TextChange()
                     {
                         Beginning = 0,
                         End = -1,
-                        Modification = Text
+                        Modification = passwordAutoComplete.GetUnmasked(Text)
                     });
                 }
             }

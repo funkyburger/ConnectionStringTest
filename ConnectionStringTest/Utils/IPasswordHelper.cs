@@ -12,5 +12,6 @@ namespace ConnectionStringTest.Utils
         string SetPassword(string connectionString, string password);
         string ExtractPassword(string connectionString);
         string UpdatePassword(string current, string partiallyMasked);
+        string AddGarble(string connectionString);
     }
 }

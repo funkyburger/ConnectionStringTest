@@ -91,6 +91,30 @@ namespace ConnectionStringTest.Utils
             return builder.ToString();
         }
 
+        public string AddGarble(string connectionString)
+        {
+            var previous = 'a';
+            var builder = new StringBuilder();
+
+            foreach(var c in connectionString)
+            {
+                if(c != MaskCharacter && previous == MaskCharacter)
+                {
+                    builder.Append(MaskCharacter);
+                }
+
+                builder.Append(c);
+                previous = c;
+            }
+
+            if (previous == MaskCharacter)
+            {
+                builder.Append(MaskCharacter);
+            }
+
+            return builder.ToString();
+        }
+
         private IEnumerable<Tuple<int, int>> GetPasswordBoundaries(string connectionString)
         {
             var passwordSegmentRegex = new Regex("(^|;)\\s*Password\\s*=\\s*(?<password>[^\";\\s]+)($|(\\s*($|;)))");

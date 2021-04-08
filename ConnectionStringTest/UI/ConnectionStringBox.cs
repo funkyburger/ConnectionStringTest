@@ -1,4 +1,5 @@
-﻿using ConnectionStringTest.EventHandling;
+﻿using ConnectionStringTest.Data;
+using ConnectionStringTest.EventHandling;
 using ConnectionStringTest.Utils;
 using System;
 using System.Collections.Generic;
@@ -13,8 +14,8 @@ namespace ConnectionStringTest.UI
     {
         public IMainTestControl MainTestControl => Parent as IMainTestControl;
 
-        public ConnectionStringBox(IPasswordHelper passwordHelper)
-            : base(passwordHelper)
+        public ConnectionStringBox(IPasswordHelper passwordHelper, IHistoryService historyService)
+            : base(passwordHelper, historyService)
         {
         }
     }

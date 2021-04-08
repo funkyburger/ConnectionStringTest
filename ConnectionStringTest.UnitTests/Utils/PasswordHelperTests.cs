@@ -81,6 +81,26 @@ namespace ConnectionStringTest.UnitTests.Utils
                 .ShouldBe("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=C:\\Blah.mdf;Initial Catalog=Blah;Connection Timeout=60;Integrated Security=True;MultipleActiveResultSets=True");
         }
 
+        //AddGarble
+        [TestMethod]
+        public void AddsAnExtraGarbleChar()
+        {
+            var helper = new PasswordHelper();
+
+            helper.AddGarble("Data Source=(LocalDb)\\MSSQLLocalDB; Password=\"●●●●●●●\"; Password=●●●●●●●●●●;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;User Id=john.smith; Password=●●●●●●●●;")
+                .ShouldBe("Data Source=(LocalDb)\\MSSQLLocalDB; Password=\"●●●●●●●●\"; Password=●●●●●●●●●●●;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;User Id=john.smith; Password=●●●●●●●●●;");
+            helper.AddGarble("Data Source=(LocalDb)\\MSSQLLocalDB; Password=\"●●●●●●●\"; Password=●●●●●●●●●●;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;User Id=john.smith; Password=\"●●●●●●●●\";")
+                .ShouldBe("Data Source=(LocalDb)\\MSSQLLocalDB; Password=\"●●●●●●●●\"; Password=●●●●●●●●●●●;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;User Id=john.smith; Password=\"●●●●●●●●●\";");
+            helper.AddGarble("Data Source=(LocalDb)\\MSSQLLocalDB; Password=\"●●●●●●●\"; Password=●●●●●●●●●●;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;User Id=john.smith; Password=\"●●●●●●●●\"")
+                .ShouldBe("Data Source=(LocalDb)\\MSSQLLocalDB; Password=\"●●●●●●●●\"; Password=●●●●●●●●●●●;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;User Id=john.smith; Password=\"●●●●●●●●●\"");
+            helper.AddGarble("Data Source=(LocalDb)\\MSSQLLocalDB; Password=\"●●●●●●●\"; Password=●●●●●●●●●●;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;User Id=john.smith; Password=●●●●●●●●")
+                .ShouldBe("Data Source=(LocalDb)\\MSSQLLocalDB; Password=\"●●●●●●●●\"; Password=●●●●●●●●●●●;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;User Id=john.smith; Password=●●●●●●●●●");
+            helper.AddGarble("Data Source=(LocalDb)\\MSSQLLocalDB; Password=\"●●●●●●●\"; Password=●●●●●●●●●●;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;          Password        =      \"●●●●●●●●\"        ;User Id=john.smith;")
+                .ShouldBe("Data Source=(LocalDb)\\MSSQLLocalDB; Password=\"●●●●●●●●\"; Password=●●●●●●●●●●●;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;          Password        =      \"●●●●●●●●●\"        ;User Id=john.smith;");
+            helper.AddGarble("Data Source=(LocalDb)\\MSSQLLocalDB; Password=\"●●●●●●●\"; Password=●●●●●●●●●●;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;          Password        =      ●●●●●●●●        ;User Id=john.smith;")
+                .ShouldBe("Data Source=(LocalDb)\\MSSQLLocalDB; Password=\"●●●●●●●●\"; Password=●●●●●●●●●●●;AttachDbFilename=C:\\Blah.mdf;Connection Timeout=60;          Password        =      ●●●●●●●●●        ;User Id=john.smith;");
+        }
+
         [TestMethod]
         public void ExtractedPasswordIsNullIfNone()
         {

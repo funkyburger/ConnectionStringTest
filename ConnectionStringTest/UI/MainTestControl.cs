@@ -45,9 +45,6 @@ namespace ConnectionStringTest.UI
             actionButton.Enabled = false;
             clipboardButton.Enabled = false;
 
-            connectionStringBox.AutoCompleteMode = AutoCompleteMode.Suggest;
-            connectionStringBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-
             actionButton.AddEventHandler(new TestFiredHandler(connectionStringTester, connectionStringCleaner));
 
             clipboardButton.AddEventHandler(new MessageCopiedToClipboardHandler());
@@ -101,9 +98,7 @@ namespace ConnectionStringTest.UI
 
         public void RefreshAutoComplete()
         {
-            connectionStringBox.AutoCompleteCustomSource.Clear();
-            // TODO broken : Fix and put back
-            //connectionStringBox.AutoCompleteCustomSource.AddRange(_connectionStringStore.GetConnectionStrings().ToArray());
+            connectionStringBox.RefreshAutoComplete();
         }
 
         public void UpdateTimer(TimeSpan elapsedTime)
