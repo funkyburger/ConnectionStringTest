@@ -15,6 +15,7 @@ namespace ConnectionStringTest.Utils
 
         public string Mask(string connectionString)
         {
+            // TODO make it mask multiple passwords
             var boundaries = GetHiddenTextBoudaries(connectionString);
 
             if(boundaries != null)
@@ -128,7 +129,7 @@ namespace ConnectionStringTest.Utils
         private string Mask(string connectionString, Tuple<int, int> boudaries)
         {
             var maskBuilder = new StringBuilder();
-            for (int i = 0; i <= boudaries.Item2; i++)
+            for (int i = 0; i < boudaries.Item2; i++)
             {
                 maskBuilder.Append(MaskCharacter);
             }

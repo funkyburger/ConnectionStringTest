@@ -20,8 +20,6 @@ namespace ConnectionStringTest.EventHandling
 
             var connectionStringBox = sender as ConnectionStringBox;
             
-            Debug.WriteLine($"New text : '{connectionStringBox.Text}'");
-
             connectionStringBox.MainTestControl.IsActionButtonEnabled = !string.IsNullOrEmpty(connectionStringBox.Text);
 
             return Task.CompletedTask;

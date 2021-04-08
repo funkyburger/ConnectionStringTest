@@ -59,6 +59,7 @@
     <Compile Include="Data\IApplicationDataService.cs" />
     <Compile Include="Data\IFileService.cs" />
     <Compile Include="Data\TestStatus.cs" />
+    <Compile Include="Data\TextChange.cs" />
     <Compile Include="DiContainer.cs" />
     <Compile Include="EventHandling\ConnectionStringBoxTextChangedHandler.cs" />
     <Compile Include="EventHandling\MessageCopiedToClipboardHandler.cs" />
@@ -80,6 +81,9 @@
     </Compile>
     <Compile Include="UI\ILinkedToMainTestControl.cs" />
     <Compile Include="UI\IMainTestControl.cs" />
+    <Compile Include="UI\PasswordTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\ResultLabel.cs">
       <SubType>Component</SubType>
     </Compile>

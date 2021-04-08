@@ -102,7 +102,8 @@ namespace ConnectionStringTest.UI
         public void RefreshAutoComplete()
         {
             connectionStringBox.AutoCompleteCustomSource.Clear();
-            connectionStringBox.AutoCompleteCustomSource.AddRange(_connectionStringStore.GetConnectionStrings().ToArray());
+            // TODO broken : Fix and put back
+            //connectionStringBox.AutoCompleteCustomSource.AddRange(_connectionStringStore.GetConnectionStrings().ToArray());
         }
 
         public void UpdateTimer(TimeSpan elapsedTime)
