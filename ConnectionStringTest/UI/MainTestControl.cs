@@ -15,32 +15,38 @@ namespace ConnectionStringTest.UI
 {
     public partial class MainTestControl : UserControl, IMainTestControl
     {
-        private readonly IConnectionStringStore _connectionStringStore;
         private readonly IThreadSafeHandler _threadSafeHandler;
 
-        public string ConnectionString => _connectionStringStore.GetConnectionStringWithPassword(connectionStringBox.Text);
+        public string ConnectionString => connectionStringBox.UnmaskedConnectionString;
         public string Message => testResultLabel.Message;
 
-        public MainTestControl(IConnectionStringStore connectionStringStore, 
-            IThreadSafeHandler threadSafeHandler, 
+        public bool IsActionButtonEnabled
+        {
+            get
+            {
+                return actionButton.Enabled;
+            }
+            set
+            {
+                _threadSafeHandler.SetControlEnabled(actionButton, value);
+            }
+        }
+
+        public MainTestControl(IThreadSafeHandler threadSafeHandler, 
             IConnectionStringTester connectionStringTester, 
             IConnectionStringCleaner connectionStringCleaner)
         {
             InitializeComponent();
-            _connectionStringStore = connectionStringStore;
             _threadSafeHandler = threadSafeHandler;
             testResultLabel.Text = string.Empty;
             actionButton.Enabled = false;
             clipboardButton.Enabled = false;
 
-            connectionStringBox.AutoCompleteMode = AutoCompleteMode.Suggest;
-            connectionStringBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-
             actionButton.AddEventHandler(new TestFiredHandler(connectionStringTester, connectionStringCleaner));
-            actionButton.MainTestControl = this;
 
             clipboardButton.AddEventHandler(new MessageCopiedToClipboardHandler());
-            clipboardButton.MainTestControl = this;
+
+            connectionStringBox.AddEventHandler(new ConnectionStringBoxTextChangedHandler());
 
             RefreshAutoComplete();
         }
@@ -53,29 +59,33 @@ namespace ConnectionStringTest.UI
 
         public void SetStatus(TestStatus status)
         {
-            if(status == TestStatus.Succeeded)
+            if (status == TestStatus.Succeeded)
             {
                 statusIcon.Image = Properties.Resources.statusIcon_success;
                 actionButton.CurrentAction = ActionButton.Action.FireTest;
-                _threadSafeHandler.SetButtonEnabled(clipboardButton, false);
+                _threadSafeHandler.SetControlEnabled(clipboardButton, false);
+                _threadSafeHandler.SetControlEnabled(connectionStringBox, true);
             }
             else if (status == TestStatus.Failed)
             {
                 statusIcon.Image = Properties.Resources.statusIcon_failure;
                 actionButton.CurrentAction = ActionButton.Action.FireTest;
-                _threadSafeHandler.SetButtonEnabled(clipboardButton, true);
+                _threadSafeHandler.SetControlEnabled(clipboardButton, true);
+                _threadSafeHandler.SetControlEnabled(connectionStringBox, true);
             }
             else if (status == TestStatus.Pending)
             {
                 statusIcon.Image = Properties.Resources.statusIcon_loading;
                 actionButton.CurrentAction = ActionButton.Action.Cancel;
-                _threadSafeHandler.SetButtonEnabled(clipboardButton, false);
+                _threadSafeHandler.SetControlEnabled(clipboardButton, false);
+                _threadSafeHandler.SetControlEnabled(connectionStringBox, false);
             }
             else if (status == TestStatus.Cancelled)
             {
                 statusIcon.Image = Properties.Resources.statusIcon_failure;
                 actionButton.CurrentAction = ActionButton.Action.FireTest;
-                _threadSafeHandler.SetButtonEnabled(clipboardButton, false);
+                _threadSafeHandler.SetControlEnabled(clipboardButton, false);
+                _threadSafeHandler.SetControlEnabled(connectionStringBox, true);
             }
             else
             {
@@ -85,18 +95,12 @@ namespace ConnectionStringTest.UI
 
         public void RefreshAutoComplete()
         {
-            connectionStringBox.AutoCompleteCustomSource.Clear();
-            connectionStringBox.AutoCompleteCustomSource.AddRange(_connectionStringStore.GetConnectionStrings().ToArray());
+            connectionStringBox.RefreshAutoComplete();
         }
 
         public void UpdateTimer(TimeSpan elapsedTime)
         {
             _threadSafeHandler.WriteInLabel(timeLabel, $"{(int)elapsedTime.TotalSeconds}.{elapsedTime.Milliseconds:000}");
-        }
-
-        private void connectionStringBox_TextChanged(object sender, EventArgs e)
-        {
-            actionButton.Enabled = !string.IsNullOrEmpty(connectionStringBox.Text);
         }
     }
 }

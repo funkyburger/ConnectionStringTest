@@ -32,5 +32,14 @@ namespace ConnectionStringTest.UnitTests.Utils
             cutter.Cut("Lorem ipsum dolor sit amet, consectetur adipiscing elit.", 150)
                 .ShouldBe("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
         }
+
+        [TestMethod]
+        public void NullStringsAreLeftAsNull()
+        {
+            var cutter = new StringCutter();
+
+            cutter.Cut(null, 150)
+                .ShouldBeNull();
+        }
     }
 }

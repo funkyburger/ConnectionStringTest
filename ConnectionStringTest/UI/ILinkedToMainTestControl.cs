@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConnectionStringTest.Utils
+namespace ConnectionStringTest.UI
 {
-    public interface IPasswordMasker
+    public interface ILinkedToMainTestControl
     {
-        string Mask(string connectionString);
+        IMainTestControl MainTestControl { get; }
     }
 }

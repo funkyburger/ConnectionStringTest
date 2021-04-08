@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ConnectionStringTest.Utils
 {
-    public interface IConnectionStringStore
+    public interface IPasswordHelper
     {
-        IEnumerable<string> GetConnectionStrings();
-        string GetConnectionStringWithPassword(string connectionString);
+        string Mask(string connectionString);
+        string AddGarble(string connectionString);
     }
 }

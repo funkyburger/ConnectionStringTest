@@ -11,6 +11,7 @@ namespace ConnectionStringTest.EventHandling
         TestFired,
         TestCompleted,
         TestCancelled,
-        MessageCopiedToClipboard
+        MessageCopiedToClipboard,
+        ConnectionStringBoxTextChanged
     }
 }

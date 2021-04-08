@@ -15,7 +15,7 @@ namespace ConnectionStringTest.EventHandling
         {
             if (uievent == Event.MessageCopiedToClipboard)
             {
-                await CopyToClipboard((sender as CopyToClipboardButton).MainTestControl);
+                await CopyToClipboard((sender as CopyToClipboardButton).Parent as IMainTestControl);
             }
             else
             {
@@ -23,9 +23,10 @@ namespace ConnectionStringTest.EventHandling
             }
         }
 
-        private async Task CopyToClipboard(IMainTestControl mainTestControl)
+        private Task CopyToClipboard(IMainTestControl mainTestControl)
         {
             Clipboard.SetText(mainTestControl.Message);
+            return Task.CompletedTask;
         }
     }
 }

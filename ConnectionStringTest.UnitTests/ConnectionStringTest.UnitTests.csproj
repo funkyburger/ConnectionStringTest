@@ -91,11 +91,12 @@
   <ItemGroup>
     <Compile Include="Data\ApplicationDataSerializerTests.cs" />
     <Compile Include="Data\ApplicationDataServiceTests.cs" />
+    <Compile Include="Data\HistoryServiceTests.cs" />
     <Compile Include="EventHandling\TestFiredHandlerTests.cs" />
+    <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\ConnectionStringCleanerTests.cs" />
-    <Compile Include="Utils\ConnectionStringStoreTests.cs" />
-    <Compile Include="Utils\PasswordMaskerTests.cs" />
+    <Compile Include="Utils\PasswordHelperTests.cs" />
     <Compile Include="Utils\StringCutterTests.cs" />
   </ItemGroup>
   <ItemGroup>

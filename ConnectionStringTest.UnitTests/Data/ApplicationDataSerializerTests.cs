@@ -12,12 +12,6 @@ namespace ConnectionStringTest.UnitTests.Data
     [TestClass]
     public class ApplicationDataSerializerTests
     {
-        //[TestMethod]
-        //public void Truc()
-        //{
-        //    throw new Exception();
-        //}
-
         [TestMethod]
         public void ApplicationDataIsDeserializedProperly()
         {
@@ -103,8 +97,6 @@ namespace ConnectionStringTest.UnitTests.Data
                 + "Data Source=srouce;Initial Catalog=catalog;Connection Timeout=60;User id=user;Password=p4ssw0rd;\n"
                 + "Data Source=othersource;Initial Catalog=blah;Connection Timeout=60;User id=user;Password=p4ssw0rd;\n"
                 + "Data Source=toto;Initial Catalog=titi;Connection Timeout=60;User id=tata;Password=tutu;\n";
-
-            //var serializedData = serializer.Serialize(data);
 
             var deserializedData = serializer.Deserialize(serializedData);
 
