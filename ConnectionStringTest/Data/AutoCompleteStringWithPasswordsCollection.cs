@@ -24,11 +24,6 @@ namespace ConnectionStringTest.Data
             return true;
         }
 
-        public bool GetUnmasked(string connectionString, out string unmasked)
-        {
-            return UnmaskedRegister.TryGetValue(connectionString, out unmasked);
-        }
-
         public string GetUnmasked(string connectionString)
         {
             string unmasked;

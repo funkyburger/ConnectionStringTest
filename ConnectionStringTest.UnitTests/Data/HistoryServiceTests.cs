@@ -28,19 +28,15 @@ namespace ConnectionStringTest.UnitTests.Data
             var historyService = new HistoryService(applicationDataServiceMock.Object, passwordHelperMock.Object);
 
             var autoComplete = historyService.GetAutoComplete();
-            var unmasked = string.Empty;
 
             autoComplete[0].ShouldBe("titi*masked*");
-            autoComplete.GetUnmasked(autoComplete[0], out unmasked).ShouldBeTrue();
-            unmasked.ShouldBe("titi");
+            autoComplete.GetUnmasked(autoComplete[0]).ShouldBe("titi");
 
             autoComplete[1].ShouldBe("tata*masked*");
-            autoComplete.GetUnmasked(autoComplete[1], out unmasked).ShouldBeTrue();
-            unmasked.ShouldBe("tata");
+            autoComplete.GetUnmasked(autoComplete[1]).ShouldBe("tata");
 
             autoComplete[2].ShouldBe("toto*masked*");
-            autoComplete.GetUnmasked(autoComplete[2], out unmasked).ShouldBeTrue();
-            unmasked.ShouldBe("toto");
+            autoComplete.GetUnmasked(autoComplete[2]).ShouldBe("toto");
         }
 
         [TestMethod]
@@ -63,19 +59,15 @@ namespace ConnectionStringTest.UnitTests.Data
             var historyService = new HistoryService(applicationDataServiceMock.Object, passwordHelperMock.Object);
 
             var autoComplete = historyService.GetAutoComplete();
-            var unmasked = string.Empty;
 
             autoComplete[0].ShouldBe("toto*masked*");
-            autoComplete.GetUnmasked(autoComplete[0], out unmasked).ShouldBeTrue();
-            unmasked.ShouldBe("toto");
+            autoComplete.GetUnmasked(autoComplete[0]).ShouldBe("toto");
 
             autoComplete[1].ShouldBe("toto*masked**");
-            autoComplete.GetUnmasked(autoComplete[1], out unmasked).ShouldBeTrue();
-            unmasked.ShouldBe("toto");
+            autoComplete.GetUnmasked(autoComplete[1]).ShouldBe("toto");
 
             autoComplete[2].ShouldBe("toto*masked***");
-            autoComplete.GetUnmasked(autoComplete[2], out unmasked).ShouldBeTrue();
-            unmasked.ShouldBe("toto");
+            autoComplete.GetUnmasked(autoComplete[2]).ShouldBe("toto");
         }
     }
 }
