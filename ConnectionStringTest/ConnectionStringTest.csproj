@@ -57,11 +57,13 @@
     <Compile Include="Data\AutoCompleteStringWithPasswordsCollection.cs" />
     <Compile Include="Data\FileService.cs" />
     <Compile Include="Data\HistoryService.cs" />
+    <Compile Include="Data\HistoryStackItem.cs" />
     <Compile Include="Data\IApplicationDataSerializer.cs" />
     <Compile Include="Data\IApplicationDataService.cs" />
     <Compile Include="Data\IAutoCompleteStringWithPasswordsCollection.cs" />
     <Compile Include="Data\IFileService.cs" />
     <Compile Include="Data\IHistoryService.cs" />
+    <Compile Include="Data\StringHistoryStack.cs" />
     <Compile Include="Data\TestStatus.cs" />
     <Compile Include="Data\TextChange.cs" />
     <Compile Include="DiContainer.cs" />

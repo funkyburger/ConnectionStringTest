@@ -20,6 +20,7 @@ namespace ConnectionStringTest.UI
         protected readonly IHistoryService HistoryService;
 
         public string UnmaskedConnectionString { get; private set; }
+        public StringHistoryStack stack { get; private set; }
 
         private bool lockTextChangedEvent = false;
 
@@ -30,6 +31,7 @@ namespace ConnectionStringTest.UI
 
             UnmaskedConnectionString = string.Empty;
             Text = string.Empty;
+            stack = new StringHistoryStack(string.Empty, 0, 0);
 
             Handlers = new List<IEventHandler>();
 
@@ -57,6 +59,8 @@ namespace ConnectionStringTest.UI
                 return;
             };
 
+            System.Diagnostics.Debug.WriteLine($"Text changed ('{Text}'). Selection : {SelectionStart}, {SelectionLength}");
+
             if (lastKeyPressedBeforeTextChange == Keys.None
                 || lastKeyPressedBeforeTextChange == Keys.Down
                 || lastKeyPressedBeforeTextChange == Keys.Up)
@@ -80,6 +84,8 @@ namespace ConnectionStringTest.UI
             {
                 await handler.Handle(Event.ConnectionStringBoxTextChanged, this);
             }
+
+            stack.Stack(UnmaskedConnectionString, SelectionStart, SelectionLength);
 
             lastKeyPressedBeforeTextChange = Keys.None;
         }
@@ -120,11 +126,11 @@ namespace ConnectionStringTest.UI
             }
             if (keyData == (Keys.Control | Keys.Z))
             {
-                // TODO
+                ApplyUndo();
             }
             if (keyData == (Keys.Control | Keys.Y))
             {
-                // TODO
+                ApplyRedo();
             }
             else if (keyData == Keys.Back)
             {
@@ -194,11 +200,34 @@ namespace ConnectionStringTest.UI
             var previousSelectionStart = SelectionStart;
             var previousSelectionLength = SelectionLength;
 
-            // TODO This erases value history. It breaks the ctrl+z/ctrl+y function. Fix.
             Text = PasswordHelper.Mask(UnmaskedConnectionString);
             
             SelectionStart = previousSelectionStart;
             SelectionLength = previousSelectionLength;
+
+            lockTextChangedEvent = false;
+        }
+
+        private void ApplyRedo()
+        {
+            ApplyUndoOrRedo(stack.Redo());
+        }
+
+        private void ApplyUndo()
+        {
+            ApplyUndoOrRedo(stack.Undo());
+        }
+
+        private void ApplyUndoOrRedo(HistoryStackItem stackItem)
+        {
+            lockTextChangedEvent = true;
+
+            UnmaskedConnectionString = stackItem.Value;
+
+            Text = PasswordHelper.Mask(UnmaskedConnectionString);
+
+            SelectionStart = stackItem.SelectionStart;
+            SelectionLength = stackItem.SelectionLength;
 
             lockTextChangedEvent = false;
         }
