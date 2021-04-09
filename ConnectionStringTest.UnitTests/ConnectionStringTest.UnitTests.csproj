@@ -92,6 +92,7 @@
     <Compile Include="Data\ApplicationDataSerializerTests.cs" />
     <Compile Include="Data\ApplicationDataServiceTests.cs" />
     <Compile Include="Data\HistoryServiceTests.cs" />
+    <Compile Include="Data\StringHistoryStackTests.cs" />
     <Compile Include="EventHandling\TestFiredHandlerTests.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
