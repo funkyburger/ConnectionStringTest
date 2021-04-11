@@ -19,6 +19,11 @@ namespace ConnectionStringTest.Data
             }
         }
 
+        public StringHistoryStack()
+            : this(string.Empty, 0, 0)
+        {
+        }
+
         public StringHistoryStack(string first, int selectionStart, int selectionLength)
         {
             stack.Add(new HistoryStackItem(first, selectionStart, selectionLength));
