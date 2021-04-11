@@ -52,7 +52,7 @@ namespace ConnectionStringTest.UI
             CurrentAction = Action.FireTest;
         }
 
-        protected override async Task FireEvent()
+        protected override void FireEvent()
         {
             Event eVent;
             if (CurrentAction == Action.FireTest)
@@ -70,7 +70,7 @@ namespace ConnectionStringTest.UI
 
             foreach (var handler in Handlers)
             {
-                await handler.Handle(eVent, this);
+                handler.Handle(eVent, this);
             }
         }
 

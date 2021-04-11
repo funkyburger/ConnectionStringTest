@@ -11,7 +11,7 @@ namespace ConnectionStringTest.EventHandling
 {
     public class ConnectionStringBoxTextChangedHandler : IEventHandler
     {
-        public Task Handle(Event uievent, object sender)
+        public void Handle(Event uievent, object sender)
         {
             if(uievent != Event.ConnectionStringBoxTextChanged)
             {
@@ -21,8 +21,6 @@ namespace ConnectionStringTest.EventHandling
             var connectionStringBox = sender as ConnectionStringBox;
             
             connectionStringBox.MainTestControl.IsActionButtonEnabled = !string.IsNullOrEmpty(connectionStringBox.Text);
-
-            return Task.CompletedTask;
         }
     }
 }

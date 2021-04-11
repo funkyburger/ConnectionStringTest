@@ -21,11 +21,11 @@ namespace ConnectionStringTest.UI
             UseVisualStyleBackColor = true;
         }
 
-        protected override async Task FireEvent()
+        protected override void FireEvent()
         {
             foreach (var handler in Handlers)
             {
-                await handler.Handle(Event.MessageCopiedToClipboard, this);
+                handler.Handle(Event.MessageCopiedToClipboard, this);
             }
         }
     }

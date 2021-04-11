@@ -56,15 +56,11 @@ namespace ConnectionStringTest.Data
                 return false;
             }
 
-            //System.Diagnostics.Debug.WriteLine("pouet");
-
-            //return obj1.Equals(obj2);
             return obj1.Value == obj2.Value
                 && obj1.SelectionStart == obj2.SelectionStart
                 && obj1.SelectionLength == obj2.SelectionLength;
         }
 
-        // this is second one '!='
         public static bool operator != (HistoryStackItem obj1, HistoryStackItem obj2)
         {
             return !(obj1 == obj2);
