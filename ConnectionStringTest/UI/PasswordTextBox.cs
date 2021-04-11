@@ -52,7 +52,7 @@ namespace ConnectionStringTest.UI
             AutoCompleteCustomSource = HistoryService.GetAutoComplete() as AutoCompleteStringWithPasswordsCollection;
         }
 
-        private async void TextChangedInternal(object sender, EventArgs e)
+        private void TextChangedInternal(object sender, EventArgs e)
         {
             if (lockTextChangedEvent) 
             {
@@ -82,7 +82,7 @@ namespace ConnectionStringTest.UI
 
             foreach (var handler in Handlers)
             {
-                await handler.Handle(Event.ConnectionStringBoxTextChanged, this);
+                handler.Handle(Event.ConnectionStringBoxTextChanged, this);
             }
 
             stack.Stack(UnmaskedConnectionString, SelectionStart, SelectionLength);

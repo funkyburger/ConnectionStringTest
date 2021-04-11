@@ -18,7 +18,7 @@ namespace ConnectionStringTest.UnitTests.EventHandling
     public class TestFiredHandlerTests
     {
         [TestMethod]
-        public async Task HandlerDisplaysResultsOnSuccess()
+        public void HandlerDisplaysResultsOnSuccess()
         {
             var stringTesterMock = new Mock<IConnectionStringTester>();
             stringTesterMock.Setup(t => t.Test(It.IsAny<string>()))
@@ -32,7 +32,7 @@ namespace ConnectionStringTest.UnitTests.EventHandling
 
             var handler = new TestFiredHandler(stringTesterMock.Object, stringCleanerMock.Object);
 
-            await handler.Handle(Event.TestFired, linkedToMainTestControlMock.Object);
+            handler.Handle(Event.TestFired, linkedToMainTestControlMock.Object);
 
             // Wait until the test is over
             while (handler.TestPending) { }
@@ -42,7 +42,7 @@ namespace ConnectionStringTest.UnitTests.EventHandling
         }
 
         [TestMethod]
-        public async Task HandlerDisplaysResultsOnFailure()
+        public void HandlerDisplaysResultsOnFailure()
         {
             var stringTesterMock = new Mock<IConnectionStringTester>();
             stringTesterMock.Setup(t => t.Test(It.IsAny<string>()))
@@ -56,7 +56,7 @@ namespace ConnectionStringTest.UnitTests.EventHandling
 
             var handler = new TestFiredHandler(stringTesterMock.Object, stringCleanerMock.Object);
 
-            await handler.Handle(Event.TestFired, linkedToMainTestControlMock.Object);
+            handler.Handle(Event.TestFired, linkedToMainTestControlMock.Object);
 
             // Wait until the test is over
             while (handler.TestPending) { }
@@ -66,7 +66,7 @@ namespace ConnectionStringTest.UnitTests.EventHandling
         }
 
         [TestMethod]
-        public async Task HandlerCancelsTheTestProperly()
+        public void HandlerCancelsTheTestProperly()
         {
             var stringCleanerMock = new Mock<IConnectionStringCleaner>();
 
@@ -76,8 +76,8 @@ namespace ConnectionStringTest.UnitTests.EventHandling
 
             var handler = new TestFiredHandler(new DelayedConnectionStringTester(), stringCleanerMock.Object);
 
-            await handler.Handle(Event.TestFired, linkedToMainTestControlMock.Object);
-            await handler.Handle(Event.TestCancelled, linkedToMainTestControlMock.Object);
+            handler.Handle(Event.TestFired, linkedToMainTestControlMock.Object);
+            handler.Handle(Event.TestCancelled, linkedToMainTestControlMock.Object);
 
             // Wait until the test is over
             while (handler.TestPending) { }
@@ -90,7 +90,7 @@ namespace ConnectionStringTest.UnitTests.EventHandling
         }
 
         [TestMethod]
-        public async Task HandlerThrowsExceptionOnTestingWhenNotIdle()
+        public void HandlerThrowsExceptionOnTestingWhenNotIdle()
         {
             var exceptionThrown = false;
 
@@ -106,10 +106,10 @@ namespace ConnectionStringTest.UnitTests.EventHandling
 
             var handler = new TestFiredHandler(stringTesterMock.Object, stringCleanerMock.Object);
 
-            await handler.Handle(Event.TestFired, linkedToMainTestControlMock.Object);
+            handler.Handle(Event.TestFired, linkedToMainTestControlMock.Object);
             try
             {
-                await handler.Handle(Event.TestFired, linkedToMainTestControlMock.Object);
+                handler.Handle(Event.TestFired, linkedToMainTestControlMock.Object);
             }
             catch (TestAlreadyRunningException)
             {

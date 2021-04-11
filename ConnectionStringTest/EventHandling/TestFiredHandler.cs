@@ -28,15 +28,15 @@ namespace ConnectionStringTest.EventHandling
             TestPending = false;
         }
 
-        public async Task Handle(Event uievent, object sender)
+        public void Handle(Event uievent, object sender)
         {
             if(uievent == Event.TestFired)
             {
-                await FireTest((sender as ILinkedToMainTestControl).MainTestControl);
+                FireTest((sender as ILinkedToMainTestControl).MainTestControl);
             }
             else if (uievent == Event.TestCancelled)
             {
-                await CancelTest();
+                CancelTest();
             }
             else
             {
@@ -44,10 +44,7 @@ namespace ConnectionStringTest.EventHandling
             }
         }
 
-        // Intended to make async test possible.
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-        private async Task FireTest(IMainTestControl mainTestControl)
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        private void FireTest(IMainTestControl mainTestControl)
         {
             if (TestPending)
             {
@@ -58,7 +55,7 @@ namespace ConnectionStringTest.EventHandling
             cancelationTokenSource = new CancellationTokenSource();
             mainTestControl.SetStatus(TestStatus.Pending);
 
-            // This is intended, it should run in background (and is the whole point of making this call chain async)
+            // This is intended, it should run in background
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             Task.Run(() =>
             {
@@ -92,12 +89,10 @@ namespace ConnectionStringTest.EventHandling
             mainTestControl.RefreshAutoComplete();
         }
 
-        private Task CancelTest()
+        private void CancelTest()
         {
             cancelationTokenSource.Cancel();
             TestPending = false;
-
-            return Task.CompletedTask;
         }
     }
 }

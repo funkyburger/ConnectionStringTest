@@ -26,11 +26,11 @@ namespace ConnectionStringTest.UI
             Handlers.Add(handler);
         }
 
-        private async void OnClick(object sender, EventArgs e)
+        private void OnClick(object sender, EventArgs e)
         {
-            await FireEvent();
+            FireEvent();
         }
 
-        protected abstract Task FireEvent();
+        protected abstract void FireEvent();
     }
 }

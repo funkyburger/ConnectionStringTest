@@ -11,11 +11,11 @@ namespace ConnectionStringTest.EventHandling
 {
     public class MessageCopiedToClipboardHandler : IEventHandler
     {
-        public async Task Handle(Event uievent, object sender)
+        public void Handle(Event uievent, object sender)
         {
             if (uievent == Event.MessageCopiedToClipboard)
             {
-                await CopyToClipboard((sender as CopyToClipboardButton).Parent as IMainTestControl);
+                CopyToClipboard((sender as CopyToClipboardButton).Parent as IMainTestControl);
             }
             else
             {
@@ -23,10 +23,9 @@ namespace ConnectionStringTest.EventHandling
             }
         }
 
-        private Task CopyToClipboard(IMainTestControl mainTestControl)
+        private void CopyToClipboard(IMainTestControl mainTestControl)
         {
             Clipboard.SetText(mainTestControl.Message);
-            return Task.CompletedTask;
         }
     }
 }
